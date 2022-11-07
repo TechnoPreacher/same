@@ -11,11 +11,12 @@ Template Name: same_gallery
             <!-- BEGIN CONTENT -->
             <section id="content">
                 <div class="wrapper page_text">
+
                     <h1 class="page_title">Gallery</h1>
                     <div class="breadcrumbs">
                         <div class="inside">
-                            <a href="#" class="first"><span>The Same</span></a>
-                            <a href="#" class="last"><span>Gallery</span></a>
+                            <a href="<?=home_url()?>" class="first"><span>+The Same</span></a>
+                            <a href="<?=get_permalink( get_the_ID() )?>" class="last"><span>+Gallery</span></a>
                         </div>
                     </div>
 

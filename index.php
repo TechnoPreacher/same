@@ -68,14 +68,19 @@
                     </div>
 
                     <ul class="columns dropcap">
+
                         <li class="column column33 first">
                             <div class="inside">
-                                <h1>Dropcap</h1>
+
+	                            <?php do_action( 'featuresforpage' ); ?>
+                                <h1>Dropcap--</h1>
                                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Primis in faucibus lorem.
                                     Curabitur ultrices interdum. Integer adipiscing dictum enim.</p>
+
                                 <p class="read_more"><a href="#">Read more</a></p>
                             </div>
                         </li>
+
                         <li class="column column33 second">
                             <div class="inside">
                                 <h1>Lorem ipsum</h1>

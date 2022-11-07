@@ -41,6 +41,7 @@ function remove_aboutus_editor() {
 
 add_action( 'aboutus', 'get_aboutus' );//сложный текст для "о нас" - заполняется на главной в кастомных полях
 add_action( 'contactus', 'get_contactus' );//сложный текст для "контактов" - заполняется на главной в кастомных полях
+add_action( 'featuresforpage', 'features_on_page' );//кастомные контенттайпы с фичами!
 
 function get_aboutus() {
 	the_field( 'aboutus', MAIN_PAGE_ID );
@@ -51,11 +52,7 @@ function get_contactus() {
 }
 
 
-function extended_text_shortcode( $atts ) {
-//return('7878 87 87 878 87 87 878 878 787');
-	?>  <p style='font-weight: bold'>Exten;lkjhgfhvbjnkml,;ded text</p>
-	<?php
-}
+
 
 function project_portfolio_shortcode( $atts ) {
 	return " 
@@ -182,22 +179,6 @@ function footer_recent_posts( $atts ) {//нужно понимать число 
 }
 
 
-function catch_that_image() {
-	global $post, $posts;
-	$first_img = '';
-	ob_start();
-	ob_end_clean();
-	$output    = preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches );
-	$first_img = $matches [1] [0];
-
-	if ( empty( $first_img ) ) { //Defines a default image
-		$first_img = "/images/default.jpg";
-	}
-
-	return $first_img;
-}
-
-
 function posts_on_page( $atts ) {
 
 	if ( $atts != '' ) {
@@ -258,16 +239,13 @@ function posts_on_page( $atts ) {
                 <a class="button button_small button_orange float_left"  href="<?= get_permalink() ?>"><span class="inside">read more</span></a>
             </article>
 
-
 			<?php
-
 
 		}
 
 		wp_reset_postdata();
 
 		?>
-
 
     </ul>
 
@@ -279,6 +257,7 @@ function posts_on_page( $atts ) {
 }
 
 function get_paragraph( $num ) {
+
 	$dom = new DOMDocument( '1.0', 'utf-8' );
 	libxml_use_internal_errors( true );
 	$html = mb_convert_encoding( get_the_content(), 'HTML-ENTITIES', 'UTF-8' );
@@ -310,7 +289,6 @@ function get_citate() {
 		$author = $data->firstChild->nodeValue;
 		$text   = $data->lastChild->nodeValue;
 		$output = "<q>" . $author . "<br>" . $text . "</q>";
-
 	}
 
 	unset( $dom );
@@ -341,4 +319,83 @@ function get_image_url() {
 	libxml_clear_errors();
 
 	return $link;
+}
+
+
+
+function  features_on_page( $atts ) {
+
+	if ( $atts != '' ) {
+		$num = $atts[0];
+	} else {
+		$num = 2;
+	}
+
+	$args2 = array(
+		'post_type'      => 'features',
+		'posts_per_page' => $num,
+	);
+	?>
+
+
+    <ul class="recent_posts">
+
+		<?php
+		$loop  = new WP_Query( $args2 );
+
+		while ( $loop->have_posts() ) {
+			$loop->the_post();
+			?>
+
+
+            <article class="article">
+                <div class="article_image nomargin">
+                    <div class="inside">
+                        <img src="<?= get_image_url() ?>" alt=""/>
+                    </div>
+                </div>
+
+                <div class="article_details">
+                    <ul class="article_author_date">
+                        <li><em>+Add:</em> <?= get_the_date() ?> </li>
+                        <li><em>+Author: </em> <a
+                                    href="<?= the_author_meta( 'url' ) ?>"><?= the_author_meta( 'nickname' ) ?></a>
+                        </li>
+                    </ul>
+                    <p class="article_comments"><em>Comment: </em><?= get_comments_number() ?>
+                    </p>
+                </div>
+
+                <!-- Название -->
+                <!-- параграф 1 -->
+                <!-- цитата -->
+                <!-- параграф 2 -->
+
+                <h1> <?= get_the_title() ?></h1>
+
+
+				<?= get_paragraph( 1 ); ?>
+
+				<?= get_citate(); ?>
+
+				<?= get_paragraph( 2 ); ?>
+
+                <a class="button button_small button_orange float_left"  href="<?= get_permalink() ?>"><span class="inside">read more</span></a>
+            </article>
+
+			<?php
+
+		}
+
+		wp_reset_postdata();
+
+		?>
+
+    </ul>
+
+
+	<?php
+
+
+	return 0;
 }
