@@ -16,7 +16,9 @@ add_shortcode( 'features', 'feature_box_shortcode' );//feature box
 add_shortcode( 'portfolio', 'project_portfolio_shortcode' );//project's portfolio
 add_shortcode( 'extended', 'extended_text_shortcode' );//some text with read more button
 
-add_action( 'projects_in_footer_all_in_li_tag', 'footer_tax' );
+add_action( 'projects_in_footer_all_in_li_tag', 'footer_tax' );//категории для проектов (в футер)
+
+add_action( 'last_projects_on_page', 'last_projects' );//проекты для раздела портфолио на главной
 
 add_action( 'posts', 'footer_recent_posts' );//так удобно получать нужное число постов для футера
 
@@ -41,17 +43,115 @@ function remove_aboutus_editor() {
 
 add_action( 'aboutus', 'get_aboutus' );//сложный текст для "о нас" - заполняется на главной в кастомных полях
 add_action( 'contactus', 'get_contactus' );//сложный текст для "контактов" - заполняется на главной в кастомных полях
-add_action( 'featuresforpage', 'features_on_page' );//кастомные контенттайпы с фичами!
+
+
+add_action( 'featurelabel', 'get_feature_label' );//название фичи из кастомного поля (заполняются на главной)!
+add_action( 'featuretext', 'get_feature_text' );//описание фичи из кастомного поля (заполняются на главной)!
+
+add_action( 'iconlabel', 'get_icon_label' );//название иконы из кастомного поля (заполняются на главной)!
+add_action( 'icontext', 'get_icon_text' );//описание иконы из кастомного поля (заполняются на главной)!
+
+add_action( 'mainlabel', 'get_main_label' );//название  из кастомного поля (заполняются на главной)!
+add_action( 'maintext', 'get_main_text' );//описание  из кастомного поля (заполняются на главной)!
+
+
+
+function last_projects( $atts ) {
+
+	if ( $atts != '' ) {
+		$num = $atts[0];
+	} else {
+		$num = 4;
+	}
+
+	$args2 = array(
+		'post_type'      => 'project',
+		'posts_per_page' => $num,
+	);
+	?>
+
+ <!--   <div class="columns"> -->
+
+
+
+
+		<?php
+		$loop  = new WP_Query( $args2 );
+		$posts = '';
+		while ( $loop->have_posts() ) {
+			$loop->the_post();
+
+			?>
+
+
+
+            <div class="column column25">
+                <a href="<?= get_image_url() ?>"
+                   class="image lightbox" data-rel="prettyPhoto[gallery]">
+								<span class="inside">
+									<img src="<?= get_image_url() ?>"
+                                         alt=""/>
+									<span class="caption"><?php echo wp_trim_words( get_the_content(),
+											2 ); ?></span>
+								</span>
+                    <span class="image_shadow"></span>
+                </a>
+            </div>
+
+
+			<?php
+
+		}
+
+		wp_reset_postdata();
+
+		?>
+
+  <!--  </div> -->
+
+	<?php
+
+	return 0;
+}
+
+
+
+function get_main_label() {
+	the_field( 'main_label', MAIN_PAGE_ID );
+}
+
+function get_main_text() {
+	the_field( 'main_text', MAIN_PAGE_ID );
+}
 
 function get_aboutus() {
 	the_field( 'aboutus', MAIN_PAGE_ID );
 }
 
+
 function get_contactus() {
 	the_field( 'contactus', MAIN_PAGE_ID );
 }
 
+function get_feature_label( $num ) {
+	$num = $num[0];
+	the_field( "feature_label_$num", MAIN_PAGE_ID );
+}
 
+function get_feature_text( $num ) {
+	$num = $num[0];
+	the_field( "feature_text_$num", MAIN_PAGE_ID );
+}
+
+function get_icon_label( $num ) {
+	$num = $num[0];
+	the_field( "icon_label_$num", MAIN_PAGE_ID );
+}
+
+function get_icon_text( $num ) {
+	$num = $num[0];
+	the_field( "icon_text_$num", MAIN_PAGE_ID );
+}
 
 
 function project_portfolio_shortcode( $atts ) {
@@ -161,19 +261,15 @@ function footer_recent_posts( $atts ) {//нужно понимать число 
 
 			<?php
 
-
 		}
 
 		wp_reset_postdata();
 
 		?>
 
-
     </ul>
 
-
 	<?php
-
 
 	return 0;
 }
@@ -197,7 +293,7 @@ function posts_on_page( $atts ) {
     <ul class="recent_posts">
 
 		<?php
-		$loop  = new WP_Query( $args2 );
+		$loop = new WP_Query( $args2 );
 
 		while ( $loop->have_posts() ) {
 			$loop->the_post();
@@ -230,13 +326,14 @@ function posts_on_page( $atts ) {
                 <h1> <?= get_the_title() ?></h1>
 
 
-	            <?= get_paragraph( 1 ); ?>
+				<?= get_paragraph( 1 ); ?>
 
 				<?= get_citate(); ?>
 
 				<?= get_paragraph( 2 ); ?>
 
-                <a class="button button_small button_orange float_left"  href="<?= get_permalink() ?>"><span class="inside">read more</span></a>
+                <a class="button button_small button_orange float_left" href="<?= get_permalink() ?>"><span
+                            class="inside">read more</span></a>
             </article>
 
 			<?php
@@ -322,80 +419,3 @@ function get_image_url() {
 }
 
 
-
-function  features_on_page( $atts ) {
-
-	if ( $atts != '' ) {
-		$num = $atts[0];
-	} else {
-		$num = 2;
-	}
-
-	$args2 = array(
-		'post_type'      => 'features',
-		'posts_per_page' => $num,
-	);
-	?>
-
-
-    <ul class="recent_posts">
-
-		<?php
-		$loop  = new WP_Query( $args2 );
-
-		while ( $loop->have_posts() ) {
-			$loop->the_post();
-			?>
-
-
-            <article class="article">
-                <div class="article_image nomargin">
-                    <div class="inside">
-                        <img src="<?= get_image_url() ?>" alt=""/>
-                    </div>
-                </div>
-
-                <div class="article_details">
-                    <ul class="article_author_date">
-                        <li><em>+Add:</em> <?= get_the_date() ?> </li>
-                        <li><em>+Author: </em> <a
-                                    href="<?= the_author_meta( 'url' ) ?>"><?= the_author_meta( 'nickname' ) ?></a>
-                        </li>
-                    </ul>
-                    <p class="article_comments"><em>Comment: </em><?= get_comments_number() ?>
-                    </p>
-                </div>
-
-                <!-- Название -->
-                <!-- параграф 1 -->
-                <!-- цитата -->
-                <!-- параграф 2 -->
-
-                <h1> <?= get_the_title() ?></h1>
-
-
-				<?= get_paragraph( 1 ); ?>
-
-				<?= get_citate(); ?>
-
-				<?= get_paragraph( 2 ); ?>
-
-                <a class="button button_small button_orange float_left"  href="<?= get_permalink() ?>"><span class="inside">read more</span></a>
-            </article>
-
-			<?php
-
-		}
-
-		wp_reset_postdata();
-
-		?>
-
-    </ul>
-
-
-	<?php
-
-
-	return 0;
-}
