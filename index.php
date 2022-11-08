@@ -8,14 +8,10 @@
         <div id="top_slide" class="flexslider">
             <ul class="slides">
 
-                <li>
-                    <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/top_slide1.jpg"
-                         alt=""/>
-                    <p class="flex-caption">
-                        <strong>Lorem ipsum dolor sit amet</strong>
-                        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Velit. Pellentesque molestie quis, venenatis consequat. Morbi egestas, justo neque, fringilla fringilla orci. Suspendisse placerat scelerisque...</span>
-                    </p>
-                </li>
+
+	            <?php do_action( 'slider'); ?>
+
+
                 <li>
                     <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/top_slide2.jpg"
                          alt=""/>
@@ -160,7 +156,7 @@
         <div class="underline"></div>
 
         <div class="portfolio">
-            <p class="all_projects"><a href="#">View all projects</a></p>
+            <p class="all_projects"><a href="   <?php do_action( 'pagelink', PORTFOLIO_PAGE_ID); ?>">View all projects</a></p>
             <h1>Portfolio</h1>
 
             <div class="columns">

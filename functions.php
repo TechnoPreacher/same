@@ -10,6 +10,7 @@
 */
 
 define( 'MAIN_PAGE_ID', 38 );//важно вписать сюда айдишник главной страницы, на ней вызвав echo(get_the_ID()); !!!
+define( 'PORTFOLIO_PAGE_ID', 101 );//важно вписать сюда айдишник главной страницы, на ней вызвав echo(get_the_ID()); !!!
 
 //add_shortcode( 'posts', 'footer_post_shortcode' );//последние записи в футере
 add_shortcode( 'features', 'feature_box_shortcode' );//feature box
@@ -23,6 +24,9 @@ add_action( 'last_projects_on_page', 'last_projects' );//проекты для �
 add_action( 'posts', 'footer_recent_posts' );//так удобно получать нужное число постов для футера
 
 add_action( 'postforpage', 'posts_on_page' );//так удобно получать нужные посты для контента страницы
+
+add_action( 'pagelink', 'page_link' );//ссылка на страницу (например берёт "all projects" для портфолио)
+
 
 add_theme_support( 'post-thumbnails' );
 
@@ -51,9 +55,64 @@ add_action( 'featuretext', 'get_feature_text' );//описание фичи из
 add_action( 'iconlabel', 'get_icon_label' );//название иконы из кастомного поля (заполняются на главной)!
 add_action( 'icontext', 'get_icon_text' );//описание иконы из кастомного поля (заполняются на главной)!
 
-add_action( 'mainlabel', 'get_main_label' );//название  из кастомного поля (заполняются на главной)!
-add_action( 'maintext', 'get_main_text' );//описание  из кастомного поля (заполняются на главной)!
+add_action( 'mainlabel', 'get_main_label' );//название статьи на главной из кастомного поля (заполняются на главной)!
+add_action( 'maintext', 'get_main_text' );//описание статьи на главной  из кастомного поля (заполняются на главной)!
 
+
+add_action( 'slider', 'get_slider' );//получить данные из кастомного контент тайпа и построить слайдер
+
+
+register_nav_menus( array(// нужно для меню в админке
+	'primary' => esc_html__( 'Primary', 'same' ),
+) );
+
+
+function get_slider( $atts ) {
+
+	if ( $atts != '' ) {
+		$num = $atts[0];
+	} else {
+		$num = - 1;
+	}
+
+	$args2 = array(
+		'post_type'      => 'slider',
+		'posts_per_page' => $num,
+	);
+	?>
+
+
+	<?php
+	$loop  = new WP_Query( $args2 );
+	$posts = '';
+	while ( $loop->have_posts() ) {
+		$loop->the_post();
+
+		?>
+
+        <li>
+            <img src="<?= get_image_url() ?>"
+                 alt=""/>
+            <p class="flex-caption">
+                <strong><?= get_the_title() ?></strong>
+                <span><?= get_paragraph( 1 ); ?></span>
+            </p>
+        </li>
+
+		<?php
+
+	}
+
+	wp_reset_postdata();
+
+	?>
+
+    <!--  </div> -->
+
+	<?php
+
+	return 0;
+}
 
 
 function last_projects( $atts ) {
@@ -70,50 +129,46 @@ function last_projects( $atts ) {
 	);
 	?>
 
- <!--   <div class="columns"> -->
+    <!--   <div class="columns"> -->
 
 
+	<?php
+	$loop  = new WP_Query( $args2 );
+	$posts = '';
+	while ( $loop->have_posts() ) {
+		$loop->the_post();
+
+		?>
 
 
-		<?php
-		$loop  = new WP_Query( $args2 );
-		$posts = '';
-		while ( $loop->have_posts() ) {
-			$loop->the_post();
-
-			?>
-
-
-
-            <div class="column column25">
-                <a href="<?= get_image_url() ?>"
-                   class="image lightbox" data-rel="prettyPhoto[gallery]">
+        <div class="column column25">
+            <a href="<?= get_image_url() ?>"
+               class="image lightbox" data-rel="prettyPhoto[gallery]">
 								<span class="inside">
 									<img src="<?= get_image_url() ?>"
                                          alt=""/>
 									<span class="caption"><?php echo wp_trim_words( get_the_content(),
 											2 ); ?></span>
 								</span>
-                    <span class="image_shadow"></span>
-                </a>
-            </div>
+                <span class="image_shadow"></span>
+            </a>
+        </div>
 
 
-			<?php
+		<?php
 
-		}
+	}
 
-		wp_reset_postdata();
+	wp_reset_postdata();
 
-		?>
+	?>
 
-  <!--  </div> -->
+    <!--  </div> -->
 
 	<?php
 
 	return 0;
 }
-
 
 
 function get_main_label() {
@@ -326,11 +381,11 @@ function posts_on_page( $atts ) {
                 <h1> <?= get_the_title() ?></h1>
 
 
-				<?= get_paragraph( 1 ); ?>
+                <p>    <?= get_paragraph( 1 ); ?> </p>
 
 				<?= get_citate(); ?>
 
-				<?= get_paragraph( 2 ); ?>
+                <p> <?= get_paragraph( 2 ); ?> </p>
 
                 <a class="button button_small button_orange float_left" href="<?= get_permalink() ?>"><span
                             class="inside">read more</span></a>
@@ -353,7 +408,7 @@ function posts_on_page( $atts ) {
 	return 0;
 }
 
-function get_paragraph( $num ) {
+function get_paragraph( $num, $content_only = false ) {
 
 	$dom = new DOMDocument( '1.0', 'utf-8' );
 	libxml_use_internal_errors( true );
@@ -363,7 +418,7 @@ function get_paragraph( $num ) {
 	$output = "";
 	if ( $data != null ) {
 		$text   = $data->nodeValue;
-		$output = "<p>" . $text . "</p>";
+		$output = $text;
 	}
 	unset( $dom );
 	libxml_clear_errors();
@@ -419,3 +474,10 @@ function get_image_url() {
 }
 
 
+function page_link( $id = '' ) {
+	if ( $id == '' ) {
+		echo( get_permalink() );
+	} else {
+		echo( get_permalink( $id ) );
+	}
+}
