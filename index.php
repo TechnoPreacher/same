@@ -140,8 +140,7 @@
     </div>
 </section>
 <!-- END CONTENT -->
-</div>
-</div>
+
 
 <?php get_footer(); ?>
 

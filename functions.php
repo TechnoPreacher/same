@@ -21,7 +21,10 @@ add_action( 'posts', 'footer_recent_posts' );//так удобно получа�
 add_action( 'postforpage', 'posts_on_page' );//так удобно получать нужные посты для контента страницы
 add_action( 'pagelink', 'page_link' );//ссылка на страницу (например берёт "all projects" для портфолио)
 add_action( 'getbloglink', 'blog_page_link' );//взять линк на корень блога для хлебных крошек
+add_action( 'getportfoliolink', 'portfolio_page_link' );//взять линк на корень портфолио для хлебных крошек
 add_action( 'singlepost', 'single_post' );//так удобно получать нужные посты для контента страницы
+
+add_action( 'imurl', 'get_image_url' );//так удобно получать нужные посты для контента страницы
 
 function single_post( $id ) {
 
@@ -64,6 +67,10 @@ function single_post( $id ) {
 
 function blog_page_link() {
 	return page_link( BLOG_PAGE_ID );
+}
+
+function portfolio_page_link() {
+	return page_link( PORTFOLIO_PAGE_ID );
 }
 
 add_theme_support( 'post-thumbnails' );
@@ -407,19 +414,29 @@ function get_citate() {
 }
 
 function get_image_url( $content = '' ) {
-	$dom = new DOMDocument;
+
+	$dom = new DOMDocument( '1.0', 'utf-8' );
 	libxml_use_internal_errors( true );
-	if ( $content == '' ) {
-		$dom->loadHTML( get_the_content() );
-	} else {
-		$dom->loadHTML( $content );
-	}
+
+    if ($content=='') {$content=get_the_content();}
+	$html = mb_convert_encoding( $content , 'HTML-ENTITIES', 'UTF-8' );
+
+
+    $dom->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+
+
 	$images = $dom->getElementsByTagName( 'img' );
 	$link = "";
+    if ($images->length!=0) {
+
+
+
 	foreach ( $images as $image ) {
 		$link = ( $image->getAttribute( 'src' ) );
 		break;//беру только первое изображение
 	}
+    }
+
 	unset( $dom );
 	libxml_clear_errors();
 	return $link;

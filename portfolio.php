@@ -2,53 +2,85 @@
 /*
 Template Name: same_portfolio
 */
+
+/* тут очень много завязно на категорию
+если категория не указана - вывожу все посты и кнопки для работы фронта
+(при этом фронт не влияет на хлебные крошки)
+
+если же катеория указана (пришли из меню или из футера) - то не вывожу кнопки для фронта
+(т.к. на странице не будет этого контента изначально)
+и добавляю крошку
+
+наверняка можно сделать изменения в скрипте, передавая категорию туда, чтоб грузить всю страницу
+ и фильтровать уже фронтом, но это ещё куча работы
+*/
+
+
 ?>
 
-<?php get_header(); ?>
+<?php get_header(); global $tax_from_tax;?>
 
-    <h1>same_portfolio</h1>
 
     <!-- BEGIN CONTENT -->
     <section id="content">
         <div class="wrapper page_text">
             <h1 class="page_title">Portfolio</h1>
-
             <div class="breadcrumbs">
                 <div class="inside">
-                    <a href="<?= home_url() ?>" class="first"><span>+The Same</span></a>
-                    <a href="<?= get_permalink( get_the_ID() ) ?>" class="last"><span>Portfolio</span></a>
+                    <a href="<?= home_url() ?>" class="first"><span>The Same</span></a>
+                    <a href="<?php $link = do_action('getportfoliolink'); echo $link; ?>" class="last"><span>Portfolio</span></a>
+                <?php if ($tax_from_tax!='') {
+                    ?>
+                    <a class="last"><span><?=$tax_from_tax?></span></a>
+
+	                <?php
+                }
+                ?>
                 </div>
             </div>
 
-            <ul id="portfolio_categories" class="portfolio_categories">
+			<?php if ( $tax_from_tax == '' ) { ?>
 
-                <li class="active segment-0"><a href="#" class="all">All Categories</a></li>
+                <ul id="portfolio_categories" class="portfolio_categories">
 
-				<?php
 
-				$terms = get_terms(
-					array(
-						'taxonomy'   => 'project_cat',
-						'hide_empty' => false,
-						//'parent'     => 0, - пуcть выводятся все категории
-					)
-				);
+                    <li class="<?php if ( $tax_from_tax == "" ) {
+						echo 'active';
+					} ?> segment-0"><a href="#" class="all">All Categories</a></li>
 
-				$list_of_project_cat = '<ul class="menu categories page_text">';
-				$num                 = 0;
-
-				foreach ( $terms as $v ) {//цикл по родительским таксономиям
-					$num ++;
-					?>
-
-                    <li class="segment-<?= $num ?>"><a href="#" class="<?= $v->slug ?>"><?= $v->name ?></a></li>
 					<?php
 
-				}
 
-				?>
 
-            </ul>
+
+					$terms = get_terms(
+						array(
+							'taxonomy'   => 'project_cat',
+							'hide_empty' => false,
+							//'parent'     => 0, - пуcть выводятся все категории
+						)
+					);
+
+					$list_of_project_cat = '<ul class="menu categories page_text">';
+					$num                 = 0;
+
+					foreach ( $terms as $v ) {//цикл по родительским таксономиям
+						$num ++;
+						?>
+                        <li class="
+                    <?php if ( $tax_from_tax == $v->slug ) {
+							echo 'active';
+						} ?>
+                    segment-<?= $num ?>"><a href="#" class="<?= $v->slug ?>"><?= $v->name ?></a></li>
+						<?php
+
+					}
+
+					?>
+
+                </ul>
+
+			<?php } ?>
 
             <div class="portfolio_items_container">
 
@@ -59,9 +91,8 @@ Template Name: same_portfolio
 					<?php
 
 					$args2 = [
-						'post_type'     => 'project',
-                        'nopaging' => true,//!!! post_per_page не отрабатывает как положено
-
+						'post_type' => 'project',
+						'nopaging'  => true,//!!! post_per_page не отрабатывает как положено
 					];
 
 					$loop = new WP_Query( $args2 );
@@ -71,15 +102,34 @@ Template Name: same_portfolio
 						$num ++;
 						$tax = get_the_terms( get_the_ID(), 'project_cat' );
 						$tax = $tax[0]->slug;
+						if ( $tax_from_tax != '' && $tax != $tax_from_tax ) {
+							continue;
+						}
+
 						?>
 
                         <li data-type="<?= $tax ?>" data-id="id-<?= $num ?>" class="column column33">
-                            <a href="<?= get_image_url() ?>"
-                               data-rel="prettyPhoto[gallery]"
-                               class="portfolio_image lightbox">
+                            <a href="<?php
+
+							$blocks = parse_blocks( get_the_content() );
+							$src    = '';
+							if ( has_block( 'image' ) ) {
+
+								foreach ( $blocks as $b ) {
+									if ( $b['blockName'] == 'core/image' ) {
+										$fullcontent = $b['innerHTML'];
+										$srcpart     = substr( $fullcontent, strpos( $fullcontent, 'src="' ) + 5 );
+										$src         = substr( $srcpart, 0, strpos( $srcpart, '"' ) );
+										echo $src;
+										break;
+									}
+
+								}
+							}
+
+							?> " data-rel="prettyPhoto[gallery]" class="portfolio_image lightbox">
                                 <div class="inside">
-                                    <img alt=""
-                                         src="<?= get_image_url() ?>">
+                                    <img alt="" src="<?= $src ?>">
                                     <div class="mask"></div>
                                 </div>
                             </a>
@@ -101,10 +151,10 @@ Template Name: same_portfolio
 					?>
 
 
-
                 </ul>
 
             </div>
+            <!--********-->
 
 
         </div>
@@ -112,7 +162,6 @@ Template Name: same_portfolio
 
     </section>
     <!-- END CONTENT -->
-    </div>
-    </div>
+
 
 <?php get_footer(); ?>

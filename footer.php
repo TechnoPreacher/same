@@ -4,6 +4,7 @@
  **/
 
 ?>
+
 <div id="page_bottom">
     <!-- BEGIN ABOVE_FOOTER -->
     <section id="above_footer">
@@ -49,6 +50,7 @@
 </div>
 
 
+</div>
 </div>
 
 <?php wp_footer(); ?>
