@@ -11,7 +11,8 @@
 
 //==ЭТО ДЕБИЛЬНОЕ РЕШЕНИЕ, НО ЗАТО В ОДНОМ МЕСТЕ==
 define( 'MAIN_PAGE_ID', 38 );//147 важно вписать сюда айдишник главной страницы, на ней вызвав echo(get_the_ID()); !!!
-define( 'PORTFOLIO_PAGE_ID', 101 );//156 важно вписать сюда айдишник главной страницы, на ней вызвав echo(get_the_ID()); !!!
+define( 'PORTFOLIO_PAGE_ID',
+	101 );//156 важно вписать сюда айдишник главной страницы, на ней вызвав echo(get_the_ID()); !!!
 define( 'BLOG_PAGE_ID', 118 );//важно вписать сюда айдишник страницы блога (где два поста) для хлебных крошек(корень)
 //================================================
 
@@ -89,6 +90,14 @@ add_action( 'maintext', 'get_main_text' );//описание статьи на �
 
 add_action( 'slider', 'get_slider' );//получить данные из кастомного контент тайпа и построить слайдер
 
+add_action( 'projectname', 'get_project_name' );
+
+
+function get_project_name() {
+	the_field( 'same_project_title', get_the_ID() );
+}
+
+
 register_nav_menus(
 	array(// нужно для меню в админке
 		'primary' => esc_html__( 'Primary', 'same' ),
@@ -115,11 +124,21 @@ function get_slider( $atts ) {
 		?>
 
         <li>
-            <img src="<?= get_image_url() ?>"
+            <img src="<?php
+			the_field( 'same_slider_image', get_the_ID() );
+			?>"
                  alt=""/>
             <p class="flex-caption">
-                <strong><?= get_the_title() ?></strong>
-                <span><?= get_paragraph( 1 ); ?></span>
+                <strong>
+					<?php
+					the_field( 'same_slider_title', get_the_ID() );
+					?>
+                </strong>
+                <span>
+                  <?php
+                  the_field( 'same_slider_info', get_the_ID() );
+                  ?>
+                </span>
             </p>
         </li>
 
@@ -224,7 +243,7 @@ function footer_tax() {
 	$list_of_project_cat = '<ul class="menu categories page_text">';
 
 	foreach ( $terms as $v ) {//цикл по родительским таксономиям
-		$link = " <a href=" . "\"" . get_term_link( $v->term_id ) . "\">$v->name ($v->count) </a>";
+		$link                = " <a href=" . "\"" . get_term_link( $v->term_id ) . "\">$v->name ($v->count) </a>";
 		$list_of_project_cat = $list_of_project_cat . '<li >' . $link;
 
 		$terms_child = get_terms(
@@ -242,7 +261,7 @@ function footer_tax() {
 		}
 
 		if ( ! empty( $child ) ) {
-			$child = '<ul>' . $child . '</ul>';
+			$child               = '<ul>' . $child . '</ul>';
 			$list_of_project_cat = $list_of_project_cat . $child;//вложенный в строку список строк
 		}
 
@@ -270,7 +289,7 @@ function footer_recent_posts( $atts ) {//нужно понимать число 
     <ul class="recent_posts">
 
 		<?php
-		$loop  = new WP_Query( $args2 );
+		$loop = new WP_Query( $args2 );
 
 		while ( $loop->have_posts() ) {
 			$loop->the_post();
@@ -283,7 +302,7 @@ function footer_recent_posts( $atts ) {//нужно понимать число 
                 <div class="text">
                     <h4 class="title">
                         <a href="<?= get_permalink() ?>">
-                            <?php echo wp_trim_words( get_the_content(),10 ); ?>
+							<?php echo wp_trim_words( get_the_content(), 10 ); ?>
                         </a>
                     </h4>
                     <p class="data">
@@ -343,13 +362,13 @@ function posts_on_page( $atts ) {
                         <li><em>+Add:</em> <?= get_the_date() ?> </li>
                         <li><em>+Author: </em>
                             <a href="<?= the_author_meta( 'url' ) ?>">
-                                <?= the_author_meta( 'nickname' ) ?>
+								<?= the_author_meta( 'nickname' ) ?>
                             </a>
                         </li>
                     </ul>
                     <p class="article_comments">
                         <em>Comment: </em>
-                        <?= get_comments_number() ?>
+						<?= get_comments_number() ?>
                     </p>
                 </div>
 
@@ -392,6 +411,7 @@ function get_paragraph( $num, $content_only = false ) {
 	}
 	unset( $dom );
 	libxml_clear_errors();
+
 	return $output;
 }
 
@@ -410,6 +430,7 @@ function get_citate() {
 	}
 	unset( $dom );
 	libxml_clear_errors();
+
 	return $output;
 }
 
@@ -418,27 +439,29 @@ function get_image_url( $content = '' ) {
 	$dom = new DOMDocument( '1.0', 'utf-8' );
 	libxml_use_internal_errors( true );
 
-    if ($content=='') {$content=get_the_content();}
-	$html = mb_convert_encoding( $content , 'HTML-ENTITIES', 'UTF-8' );
+	if ( $content == '' ) {
+		$content = get_the_content();
+	}
+	$html = mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' );
 
 
-    $dom->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+	$dom->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
 
 
 	$images = $dom->getElementsByTagName( 'img' );
-	$link = "";
-    if ($images->length!=0) {
+	$link   = "";
+	if ( $images->length != 0 ) {
 
 
-
-	foreach ( $images as $image ) {
-		$link = ( $image->getAttribute( 'src' ) );
-		break;//беру только первое изображение
+		foreach ( $images as $image ) {
+			$link = ( $image->getAttribute( 'src' ) );
+			break;//беру только первое изображение
+		}
 	}
-    }
 
 	unset( $dom );
 	libxml_clear_errors();
+
 	return $link;
 }
 

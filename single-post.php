@@ -6,12 +6,9 @@ Template Name: same_blog_post
 ?>
 
 
-
-		<!-- BEGIN TITLEBAR -->
 		        <?php   get_header(); ?>
-		<!-- END TITLEBAR -->
 
-		<!-- BEGIN CONTENT -->
+
 		<section id="content">
 
 			<div class="wrapper page_text">

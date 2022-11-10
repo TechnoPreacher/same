@@ -1,24 +1,15 @@
-<!-- BEGIN TITLEBAR -->
 <?php get_header(); ?>
-<h1>SINGLE <?php echo (get_the_ID()); ?></h1>
 
-<!-- END TITLEBAR -->
-
-<!-- BEGIN TOP -->
 <section id="top">
     <div class="wrapper">
         <div id="top_slide" class="flexslider">
             <ul class="slides">
-
 	            <?php do_action( 'slider'); ?>
-
             </ul>
         </div>
     </div>
 </section>
-<!-- END TOP -->
 
-<!-- BEGIN CONTENT -->
 <section id="content">
     <div class="wrapper page_text page_home">
         <div class="introduction">
@@ -139,12 +130,8 @@
         </div>
     </div>
 </section>
-<!-- END CONTENT -->
+
 
 
 <?php get_footer(); ?>
 
-<!-- BEGIN ABOVE_FOOTER -->
-<!-- END ABOVE_FOOTER -->
-<!-- BEGIN FOOTER -->
-<!-- END FOOTER -->

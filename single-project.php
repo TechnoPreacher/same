@@ -22,38 +22,31 @@ Template Name: same_project
                 </div>
             </div>
 
+
+
+
+
+
             <div class="columns">
                 <div class="column column33">
-                    <h1>	<?=the_field( 'project_title', get_the_ID());?></h1>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Egestas, justo nec scelerisque urna
-                        quis turpis et netus et odio. In mollis, orci id leo lobortis cursus ante. Vivamus vel eros quis
-                        enim. Phasellus fermentum eget, pede. Etiam at eros. Sed ornare laoreet. Morbi et turpis. Duis
-                        vulputate tortor eget luctus et dui. Morbi id eros.</p>
+                    <h1><?=the_field( 'same_project_title', get_the_ID() )?> </h1>
+                    <p><?=the_field( 'project_about_text', get_the_ID() )?></p>
                     <h1>Client:</h1>
-                    <p>BigCompany S.A.</p>
+                    <p><?=the_field( 'project_company', get_the_ID() )?></p>
                     <h1>Model & Photographer:</h1>
-                    <p><a href="#">Jessica Parker</a> // Jo-Who Shan</p>
+                    <p><a href="#"><?=the_field( 'project_model', get_the_ID() )?></a> // Jo-Who Shan</p>
                 </div>
 
                 <div class="column column66">
                     <div id="content_slide">
                         <div class="flexslider">
                             <ul class="slides">
-                                <li><a href="./gfx/examples/img_big3.jpg" class="lightbox"
+                                <li><a href="<?=get_field( 'same_project_image', get_the_ID() )['url'] ?>" class="lightbox"
                                        data-rel="prettyPhoto[gallery]"><img
-                                                src="./gfx/examples/content_slide606x480.jpg" alt="1"/></a></li>
-                                <li><a href="./gfx/examples/img_big2.jpg" class="lightbox"
-                                       data-rel="prettyPhoto[gallery]"><img
-                                                src="./gfx/examples/content_slide606x480_2.jpg" alt="2"/></a></li>
-                                <li><a href="./gfx/examples/img_big5.jpg" class="lightbox"
-                                       data-rel="prettyPhoto[gallery]"><img
-                                                src="./gfx/examples/content_slide606x480_3.jpg" alt="3"/></a></li>
-                                <li><a href="./gfx/examples/img_big6.jpg" class="lightbox"
-                                       data-rel="prettyPhoto[gallery]"><img
-                                                src="./gfx/examples/content_slide606x480_4.jpg" alt="4"/></a></li>
-                                <li><a href="./gfx/examples/img_big8.jpg" class="lightbox"
-                                       data-rel="prettyPhoto[gallery]"><img
-                                                src="./gfx/examples/content_slide606x480_5.jpg" alt="5"/></a></li>
+                                                src="<?=get_field( 'same_project_image', get_the_ID() )['url'] ?>" alt="1"/></a></li>
+
+                                <!-- тут нужен цикл по кастомному полю - галерея,но оно доступно только в про-версии форм-->
+
                             </ul>
                         </div>
                     </div>
