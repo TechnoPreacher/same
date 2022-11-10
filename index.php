@@ -1,5 +1,7 @@
 <!-- BEGIN TITLEBAR -->
 <?php get_header(); ?>
+<h1>SINGLE <?php echo (get_the_ID()); ?></h1>
+
 <!-- END TITLEBAR -->
 
 <!-- BEGIN TOP -->
@@ -8,42 +10,8 @@
         <div id="top_slide" class="flexslider">
             <ul class="slides">
 
-
 	            <?php do_action( 'slider'); ?>
 
-
-                <li>
-                    <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/top_slide2.jpg"
-                         alt=""/>
-                    <p class="flex-caption">
-                        <strong>Sit amet</strong>
-                        <span>Pellentesque molestie quis, venenatis consequat. Morbi egestas, justo neque.</span>
-                    </p>
-                </li>
-                <li>
-                    <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/top_slide3.jpg"
-                         alt=""/>
-                    <p class="flex-caption">
-                        <strong>Dolor amet sit</strong>
-                        <span>Velit, pellentesque molestie quis, venenatis consequat.</span>
-                    </p>
-                </li>
-                <li>
-                    <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/top_slide4.jpg"
-                         alt=""/>
-                    <p class="flex-caption">
-                        <strong>Sit amet</strong>
-                        <span>Pellentesque molestie quis, venenatis consequat. Morbi egestas, justo neque.</span>
-                    </p>
-                </li>
-                <li>
-                    <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/top_slide5.jpg"
-                         alt=""/>
-                    <p class="flex-caption">
-                        <strong>Lorem ipsum dolor sit amet</strong>
-                        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Velit. Pellentesque molestie quis, venenatis consequat. Morbi egestas, justo neque, fringilla fringilla orci. Suspendisse placerat scelerisque...</span>
-                    </p>
-                </li>
             </ul>
         </div>
     </div>

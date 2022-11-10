@@ -10,25 +10,25 @@
         <div class="wrapper above_footer_boxes page_text">
 
             <div class="box first">
-                <h3>About -- Us</h3>
+                <h3>About Us</h3>
 				<?php do_action( 'aboutus' ); ?>
             </div>
 
             <div class="box second">
-                <h3>Recent -- Posts</h3>
+                <h3>Recent Posts</h3>
 				<?php do_action( 'posts', [ 3 ] ); ?>
             </div>
 
 
             <div class="box third">
-                <h3>Cat--egories</h3>
+                <h3>Categories</h3>
 
 				<?php do_action( 'projects_in_footer_all_in_li_tag' ); ?>
 
             </div>
 
             <div class="box fourth">
-                <h3>Contact--Us</h3>
+                <h3>Contact Us</h3>
 				<?php do_action( 'contactus' ); ?>
             </div>
         </div>

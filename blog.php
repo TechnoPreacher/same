@@ -5,9 +5,9 @@ Template Name: same_blog
 
 ?>
 
-
+<?php   get_header(); ?>
 		<!-- BEGIN TITLEBAR -->
-		        <?php   get_header(); ?>
+
 		<!-- END TITLEBAR -->
 
 		<!-- BEGIN CONTENT -->
@@ -17,8 +17,8 @@ Template Name: same_blog
 				<h1 class="page_title">Blog</h1>
 				<div class="breadcrumbs">
 					<div class="inside">
-						<a href="<?=home_url()?>" class="first"><span>+The Same</span></a>
-						<a href="<?=get_permalink( get_the_ID() )?>" class="last"><span>+Blog</span></a>
+						<a href="<?=home_url()?>" class="first"><span>The Same</span></a>
+						<a href="<?=get_permalink( get_the_ID() )?>" class="last"><span>Blog</span></a>
 					</div>
 				</div>
 
@@ -44,17 +44,17 @@ Template Name: same_blog
 						</div>
 
 						<div class="padd16bot">
-							<h1>++RecentPosts</h1>
+							<h1>RecentPosts</h1>
 							<?php do_action('posts', [3] ); ?>
 						</div>
 
 						<div class="padd16bot">
-							<h1>++About Us</h1>
+							<h1>About Us</h1>
 							<?php do_action( 'aboutus' ); ?>
 							</div>
 
 						<div class="padd16bot">
-							<h1>++Categories</h1>
+							<h1>Categories</h1>
 							<ul class="menu categories page_text">
 								<?php do_action( 'projects_in_footer_all_in_li_tag' ); ?>
 							</ul>

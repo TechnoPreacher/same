@@ -24,11 +24,11 @@ Template Name: same_gallery
                         <div class="columns">
                             <div class="column column50">
                                 <div class="image">
-                                    <img src="./gfx/examples/content_image446x294.jpg" alt=""/>
+                                    <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/content_image446x294.jpg" alt=""/>
                                     <p class="caption">
                                         <strong>Photo Title</strong>
                                         <span>Fusce convallis accumsan, urna eget orci lorem eget augue sed erat. Aenean ut venenatis augue nec pede.</span>
-                                        <a href="./gfx/examples/img_big2.jpg" data-rel="prettyPhoto[gallery]"
+                                        <a href="<?php bloginfo( 'stylesheet_directory' ); ?>/fx/examples/img_big2.jpg" data-rel="prettyPhoto[gallery]"
                                            class="button button_small button_orange float_right lightbox"><span
                                                     class="inside">zoom</span></a>
                                     </p>
@@ -36,11 +36,11 @@ Template Name: same_gallery
                             </div>
                             <div class="column column50">
                                 <div class="image">
-                                    <img src="./gfx/examples/content_image446x294_2.jpg" alt=""/>
+                                    <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/content_image446x294_2.jpg" alt=""/>
                                     <p class="caption">
                                         <strong>Photo Title</strong>
                                         <span>Fusce convallis accumsan, urna eget orci lorem eget augue sed erat. Aenean ut venenatis augue nec pede.</span>
-                                        <a href="./gfx/examples/img_big1.jpg" data-rel="prettyPhoto[gallery]"
+                                        <a href="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/img_big1.jpg" data-rel="prettyPhoto[gallery]"
                                            class="button button_small button_orange float_right lightbox"><span
                                                     class="inside">zoom</span></a>
                                     </p>
@@ -50,11 +50,11 @@ Template Name: same_gallery
                         <div class="columns">
                             <div class="column column50">
                                 <div class="image">
-                                    <img src="./gfx/examples/content_image446x294_3.jpg" alt=""/>
+                                    <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/content_image446x294_3.jpg" alt=""/>
                                     <p class="caption">
                                         <strong>Photo Title</strong>
                                         <span>Fusce convallis accumsan, urna eget orci lorem eget augue sed erat. Aenean ut venenatis augue nec pede.</span>
-                                        <a href="./gfx/examples/img_big8.jpg" data-rel="prettyPhoto[gallery]"
+                                        <a href="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/examples/img_big8.jpg" data-rel="prettyPhoto[gallery]"
                                            class="button button_small button_orange float_right lightbox"><span
                                                     class="inside">zoom</span></a>
                                     </p>

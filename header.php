@@ -7,7 +7,7 @@
 <html>
 <head>
 
-    <title>++The Same</title>
+    <title>The Same</title>
 
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/reset.css" type="text/css"/>
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/style.css" type="text/css"/>
@@ -26,6 +26,17 @@
             src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.prettyphoto.min.js"></script>
     <script type="text/javascript"
             src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.stylesheettoggle.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.quicksand.js"></script>
+
+
+
+
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/onload.js"></script>
 
     <!--[if IE]>
@@ -50,14 +61,14 @@
     <ul id="stylesheets">
         <li>
             <a href="#" class="sheet" id="light">
-                <span class="image"><img src="./gfx/stylesheet_light.jpg" alt=""/></span>
+                <span class="image"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/stylesheet_light.jpg" alt=""/></span>
                 <span class="mask"></span>
                 <span class="name">Light version</span>
             </a>
         </li>
         <li>
             <a href="#" class="sheet" id="dark">
-                <span class="image"><img src="./gfx/stylesheet_dark.jpg" alt=""/></span>
+                <span class="image"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/stylesheet_dark.jpg" alt=""/></span>
                 <span class="mask"></span>
                 <span class="name">Dark version</span>
             </a>
@@ -72,7 +83,7 @@
         <div id="page_top_in">
             <header id="titlebar">
                 <div class="wrapper">
-                    <a id="logo" href="#"><span></span></a>
+                    <a id="logo" href="<?php bloginfo( 'url' ); ?>"><span></span></a>
                     <div id="titlebar_right">
                         <ul id="social_icons">
                             <li><a href="#" class="linkedin"></a></li>
@@ -103,7 +114,7 @@
 										?>
 
                                         <li>
-                                        <a href="<?= $menu_item->url ?>">##<?= $menu_item->menu_item_parent ?><?= $menu_item->title ?></a>
+                                        <a href="<?= $menu_item->url ?>"><?= $menu_item->title ?></a>
 
 										<?php
 									}
@@ -131,7 +142,7 @@
 													?>
 
                                                     <li>
-                                                        <a href="<?=$menu_child_item->url ?>"><span>**<?= $menu_child_item->title ?></span></a>
+                                                        <a href="<?=$menu_child_item->url ?>"><span><?= $menu_child_item->title ?></span></a>
                                                     </li>
 
 
