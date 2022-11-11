@@ -358,20 +358,20 @@ function posts_on_page( $atts ) {
             <article class="article">
                 <div class="article_image nomargin">
                     <div class="inside">
-                        <img src="<?= "todo"//get_image_url()
+                        <img src="<?= get_image_url()
 								  ?>" alt=""/>
                     </div>
                 </div>
 
                 <div class="article_details">
                     <ul class="article_author_date">
-                        <li><em>+Add:</em> <?= "todo"//get_the_date()
+                        <li><em>+Add:</em> <?= get_the_date()
 							?> </li>
                         <li><em>+Author: </em>
-                            <a href="<?= "todo"//the_author_meta( 'url' ) 
+                            <a href="<?= the_author_meta( 'url' ) 
 									 ?>">
-								<?= "todo"
-			//	the_author_meta( 'nickname' )
+								<?= 
+				the_author_meta( 'nickname' )
 								?>
                             </a>
                         </li>
@@ -389,17 +389,13 @@ function posts_on_page( $atts ) {
                 <!-- цитата -->
                 <!-- параграф 2 -->
 
-                <h1><?="todo" 
-				//get_the_title() 
+                <h1><?=get_the_title() 
 					?></h1>
-                <p><?= "todo"
-				//get_paragraph( 1 )
+                <p><?= get_paragraph( 1 )
 					?> </p>
-				<?= "todo"
-				//get_citate()
+				<?= get_citate()
 				?>
-                <p> <?= "todo"
-				//get_paragraph( 2 ) 
+                <p> <?= get_paragraph( 2 ) 
 					?> </p>
 
                 <a class="button button_small button_orange float_left" href="<?= get_permalink() ?>">
