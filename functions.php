@@ -173,10 +173,15 @@ function last_projects( $atts ) {
 		?>
 
         <div class="column column25">
-            <a href="<?= get_image_url() ?>"
+            <a href="<?php
+							the_field( 'same_project_image', get_the_ID() );
+							?>"
+			   
                class="image lightbox" data-rel="prettyPhoto[gallery]">
 								<span class="inside">
-									<img src="<?= get_image_url() ?>"
+									<img src="<?php
+							the_field( 'same_project_image', get_the_ID() );
+							?>"
                                          alt=""/>
 									<span class="caption"><?php echo wp_trim_words( get_the_content(),
 											2 ); ?></span>
@@ -353,22 +358,29 @@ function posts_on_page( $atts ) {
             <article class="article">
                 <div class="article_image nomargin">
                     <div class="inside">
-                        <img src="<?= get_image_url() ?>" alt=""/>
+                        <img src="<?= "todo"//get_image_url()
+								  ?>" alt=""/>
                     </div>
                 </div>
 
                 <div class="article_details">
                     <ul class="article_author_date">
-                        <li><em>+Add:</em> <?= get_the_date() ?> </li>
+                        <li><em>+Add:</em> <?= "todo"//get_the_date()
+							?> </li>
                         <li><em>+Author: </em>
-                            <a href="<?= the_author_meta( 'url' ) ?>">
-								<?= the_author_meta( 'nickname' ) ?>
+                            <a href="<?= "todo"//the_author_meta( 'url' ) 
+									 ?>">
+								<?= "todo"
+			//	the_author_meta( 'nickname' )
+								?>
                             </a>
                         </li>
                     </ul>
                     <p class="article_comments">
                         <em>Comment: </em>
-						<?= get_comments_number() ?>
+						<?=
+				get_comments_number() 
+						?>
                     </p>
                 </div>
 
@@ -377,10 +389,18 @@ function posts_on_page( $atts ) {
                 <!-- цитата -->
                 <!-- параграф 2 -->
 
-                <h1><?= get_the_title() ?></h1>
-                <p><?= get_paragraph( 1 ) ?> </p>
-				<?= get_citate() ?>
-                <p> <?= get_paragraph( 2 ) ?> </p>
+                <h1><?="todo" 
+				//get_the_title() 
+					?></h1>
+                <p><?= "todo"
+				//get_paragraph( 1 )
+					?> </p>
+				<?= "todo"
+				//get_citate()
+				?>
+                <p> <?= "todo"
+				//get_paragraph( 2 ) 
+					?> </p>
 
                 <a class="button button_small button_orange float_left" href="<?= get_permalink() ?>">
                     <span class="inside">read more</span>

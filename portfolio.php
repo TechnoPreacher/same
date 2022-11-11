@@ -18,7 +18,8 @@ Template Name: same_portfolio
 
 ?>
 
-<?php get_header(); global $tax_from_tax;?>
+<?php get_header();
+global $tax_from_tax; ?>
 
 
     <!-- BEGIN CONTENT -->
@@ -28,14 +29,15 @@ Template Name: same_portfolio
             <div class="breadcrumbs">
                 <div class="inside">
                     <a href="<?= home_url() ?>" class="first"><span>The Same</span></a>
-                    <a href="<?php $link = do_action('getportfoliolink'); echo $link; ?>" class="last"><span>Portfolio</span></a>
-                <?php if ($tax_from_tax!='') {
-                    ?>
-                    <a class="last"><span><?=$tax_from_tax?></span></a>
+                    <a href="<?php $link = do_action( 'getportfoliolink' );
+					echo $link; ?>" class="last"><span>Portfolio</span></a>
+					<?php if ( $tax_from_tax != '' ) {
+						?>
+                        <a class="last"><span><?= $tax_from_tax ?></span></a>
 
-	                <?php
-                }
-                ?>
+						<?php
+					}
+					?>
                 </div>
             </div>
 
@@ -49,8 +51,6 @@ Template Name: same_portfolio
 					} ?> segment-0"><a href="#" class="all">All Categories</a></li>
 
 					<?php
-
-
 
 
 					$terms = get_terms(
@@ -110,26 +110,13 @@ Template Name: same_portfolio
 
                         <li data-type="<?= $tax ?>" data-id="id-<?= $num ?>" class="column column33">
                             <a href="<?php
-
-							$blocks = parse_blocks( get_the_content() );
-							$src    = '';
-							if ( has_block( 'image' ) ) {
-
-								foreach ( $blocks as $b ) {
-									if ( $b['blockName'] == 'core/image' ) {
-										$fullcontent = $b['innerHTML'];
-										$srcpart     = substr( $fullcontent, strpos( $fullcontent, 'src="' ) + 5 );
-										$src         = substr( $srcpart, 0, strpos( $srcpart, '"' ) );
-										echo $src;
-										break;
-									}
-
-								}
-							}
-
-							?> " data-rel="prettyPhoto[gallery]" class="portfolio_image lightbox">
+							the_field( 'same_project_image', get_the_ID() );
+							?>"
+                               data-rel="prettyPhoto[gallery]" class="portfolio_image lightbox">
                                 <div class="inside">
-                                    <img alt="" src="<?= $src ?>">
+                                    <img alt="" src="<?php
+									the_field( 'same_project_image', get_the_ID() );
+									?>">
                                     <div class="mask"></div>
                                 </div>
                             </a>
