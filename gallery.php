@@ -117,6 +117,25 @@ Template Name: same_gallery
 					);
 
 
+				$links2 = wp_kses_post
+					(
+					paginate_links(
+						[
+							'total'     => $query->max_num_pages,
+							'current'   => $current,
+							'prev_next' => true,
+
+							'show_all' => true,
+
+						]
+					)
+					);
+
+			?> <h1>	<?php echo ($links2
+
+                    ); ?> </h1> <?php
+
+
 				//придётся достать ссылки для начала и конца до формирования списка,
                 // т.к. они не сразу видны в линках
 
@@ -127,6 +146,7 @@ Template Name: same_gallery
 
 					$rep         = array( '&quot;', '"' );
 					$v           = str_replace( $rep, '', $v );
+                    $v =  $v;
 					$needleFirst = "a class=prev page-numbers href=";
 					$needleNext  = "a class=next page-numbers href=";
 
@@ -164,8 +184,9 @@ Template Name: same_gallery
 					<?php
 
 					foreach ( $links as $v ) {
-						$rep    = array( '&quot;', '"' );
+						$rep    = array( '&quot;', '"' , '%3E','#038;');
 						$v      = str_replace( $rep, '', $v );
+						$v = ( $v);
 						$needle = "a class=page-numbers href=";
 
 						if ( strpos( $v, $needle ) > 0 )//если нашли простые страницы пагинации
@@ -179,8 +200,11 @@ Template Name: same_gallery
 							$title   = substr( $srcpart, strpos( $srcpart, '>' ) + 1,
 								strpos( $srcpart, '>' ) - ( strpos( $srcpart, '</a>' ) - 3 ) );
 
+
+
+
 							?>
-                            <li><a href="<?= $src ?>>"><span><?= $title ?></span></a></li>
+                            <li><a href="<?= $src ?>"><span><?= $title ?></span></a></li>
 							<?php
 						}
 
