@@ -52,6 +52,7 @@
                     <p class="read_more"><a href="#">Read more</a></p>
                 </div>
             </li>
+
             <li class="column column33 third">
                 <div class="inside">
                     <h1>
@@ -64,6 +65,7 @@
                     <p class="read_more"><a href="#">Read more</a></p>
                 </div>
             </li>
+
         </ul>
 
         <ul class="columns iconcap">
@@ -82,6 +84,7 @@
                     <p class="read_more"><a href="#">Read more</a></p>
                 </div>
             </li>
+
             <li class="column column33 italk">
                 <div class="inside">
 
@@ -96,6 +99,7 @@
                     <p class="read_more"><a href="#">Read more</a></p>
                 </div>
             </li>
+
             <li class="column column33 icon">
                 <div class="inside">
                     <!--тут наверное косяк с классом! класс - icon а название - iNews -->
@@ -115,7 +119,7 @@
         <div class="underline"></div>
 
         <div class="portfolio">
-            <p class="all_projects"><a href="   <?php  get_permalink( PORTFOLIO_PAGE_ID ) ?>">View all projects</a></p>
+            <p class="all_projects"><a href="   <?php the_permalink( PORTFOLIO_PAGE_ID ) ?>">View all projects</a></p>
             <h1>Portfolio</h1>
 
             <div class="columns">

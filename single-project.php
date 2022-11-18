@@ -14,7 +14,7 @@ Template Name: same_project
             <div class="breadcrumbs">
                 <div class="inside">
                     <a href="#" class="first"><span>The Same</span></a>
-                    <a href="<?php $link = page_link( PORTFOLIO_PAGE_ID );
+                    <a href="<?php $link = get_permalink( PORTFOLIO_PAGE_ID );
 					echo $link; ?>"><span>Portfolio</span></a>
                     <a href="<?= get_permalink() ?>" class="last"><span><?= get_the_title() ?></span></a>
                 </div>
@@ -23,24 +23,24 @@ Template Name: same_project
 
             <div class="columns">
                 <div class="column column33">
-                    <h1><?= the_field( 'same_project_title', get_the_ID() ) ?> </h1>
-                    <p><?= the_field( 'project_about_text', get_the_ID() ) ?></p>
+                    <h1><?= the_field( 'same_project_title') ?> </h1>
+                    <p><?= the_field( 'project_about_text' ) ?></p>
                     <h1>Client:</h1>
-                    <p><?= the_field( 'project_company', get_the_ID() ) ?></p>
+                    <p><?= the_field( 'project_company') ?></p>
                     <h1>Model & Photographer:</h1>
-                    <p><a href="#"><?= the_field( 'project_model', get_the_ID() ) ?></a> // Jo-Who Shan</p>
+                    <p><a href="#"><?= the_field( 'project_model') ?></a> // Jo-Who Shan</p>
                 </div>
 
                 <div class="column column66">
                     <div id="content_slide">
                         <div class="flexslider">
                             <ul class="slides">
-                                <li><a href="<?= get_field( 'same_project_image', get_the_ID() ) ?>" class="lightbox"
+                                <li><a href="<?= get_field( 'same_project_image' ) ?>" class="lightbox"
                                        data-rel="prettyPhoto[gallery]"><img
-                                                src="<?= get_field( 'same_project_image', get_the_ID() ) ?>"
+                                                src="<?= get_field( 'same_project_image') ?>"
                                                 alt="1"/></a></li>
 
-                                <!-- тут нужен цикл по кастомному полю - галерея,но оно доступно только в про-версии форм-->
+                                <!-- there is a loop for custom field 'Gallery', but it enable only in PRO version of ACF-->
 
                             </ul>
                         </div>

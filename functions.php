@@ -1,14 +1,5 @@
 <?php
 
-/*
-статические данные для футера на всех страницах берутся из кастомных полей;
-для удобства заполнять кастомные поля футера нужно только на главной странице
-настроить ACF нужно так, чтоб кастомные поля выводились только на главной
-выводить значения следует стандартными методами ACF (обращаться через внутри do_action('aboutus'); )
-для того, чтоб всё работало корректно нужно через get_the_ID() получать ID для
-главной страницы и вписать его тут внутри функции get_aboutus
-*/
-
 add_theme_support( 'post-thumbnails' );
 
 define( 'MAIN_PAGE_ID', 38 );//147 id for main page (get_the_ID())
@@ -19,49 +10,11 @@ add_action( 'projects_in_footer_all_in_li_tag', 'footer_tax' );//project's taxon
 add_action( 'last_projects_on_page', 'last_projects' );//projects for "last roject" blocks
 add_action( 'posts', 'footer_recent_posts' );//recent posts for footer
 add_action( 'postforpage', 'posts_on_page' );//posts for post's page
-add_action( 'singlepost', 'single_post' );//get the single post content
 add_action( 'imurl', 'get_image_url' );//get image src url for from content
 
 add_action( 'featurelabel', 'get_feature_label' );//feature's labels from ACF (fill on mainpage)
 add_action( 'featuretext', 'get_feature_text' );//feature's info from ACF (fill on mainpage)
 add_action( 'slider', 'get_slider' );//slider set/fill in custom content type
-
-function single_post( $id ) {
-
-	$content_post = get_post( $id );
-	apply_filters( 'the_content', $content_post->post_content );//make filter and get content for post by id
-	?>
-
-    <article class="article">
-        <div class="article_image nomargin">
-            <div class="inside">
-                <img src="<?= get_image_url() ?>" alt=""/>
-            </div>
-        </div>
-
-        <div class="article_details">
-            <ul class="article_author_date">
-                <li><em>Add:</em> <?= get_the_date() ?> </li>
-                <li><em>Author: </em>
-                    <a href="<?= the_author_meta( 'url', get_current_user_id() ) ?>">
-						<?= the_author_meta( 'nickname', get_current_user_id() ) ?>
-                    </a>
-                </li>
-            </ul>
-            <p class="article_comments"><em>Comment: </em><?= get_comments_number() ?>
-            </p>
-        </div>
-
-        <p> <?= get_paragraph( 1 ); ?> </p>
-
-		<?= get_citate(); ?>
-
-        <p> <?= get_paragraph( 2 ); ?> </p>
-
-    </article>
-
-	<?php
-}
 
 register_nav_menus(//for "menu" editor access on admin page
 	array(
@@ -129,7 +82,6 @@ function last_projects( $atts ) {
 
         <div class="column column25">
             <a href="<?php the_field( 'same_project_image', get_the_ID() ); ?>"
-
                class="image lightbox" data-rel="prettyPhoto[gallery]">
 								<span class="inside">
 									<img src="<?php the_field( 'same_project_image', get_the_ID() ); ?>"
@@ -232,7 +184,6 @@ function footer_recent_posts( $atts ) {//нужно понимать число 
             </li>
 
 			<?php
-
 		}
 
 		wp_reset_postdata();
@@ -283,11 +234,8 @@ function posts_on_page( $atts ) {
                         <li><em>+Add:</em> <?= get_the_date()
 							?> </li>
                         <li><em>+Author: </em>
-                            <a href="<?= the_author_meta( 'url' )
-							?>">
-								<?=
-								the_author_meta( 'nickname' )
-								?>
+                            <a href="<?= the_author_meta( 'url' ) ?>">
+								<?= the_author_meta( 'nickname' ) ?>
                             </a>
                         </li>
                     </ul>

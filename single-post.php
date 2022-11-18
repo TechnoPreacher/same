@@ -8,9 +8,7 @@ Template Name: same_blog_post
 
 <?php get_header(); ?>
 
-
     <section id="content">
-
         <div class="wrapper page_text">
             <div class="breadcrumbs">
                 <div class="inside">
@@ -23,9 +21,34 @@ Template Name: same_blog_post
 
             <div class="introduction">
                 <h1 class="page_title"><?= the_title() ?></h1>
-				<?php //current post
-				do_action( 'singlepost', get_the_ID() );
-				?>
+                <article class="article">
+                    <div class="article_image nomargin">
+                        <div class="inside">
+                            <img src="<?= get_image_url() ?>" alt=""/>
+                        </div>
+                    </div>
+
+                    <div class="article_details">
+                        <ul class="article_author_date">
+                            <li><em>Add:</em> <?= get_the_date() ?> </li>
+                            <li><em>Author: </em>
+                                <a href="<?= the_author_meta( 'url', get_current_user_id() ) ?>">
+									<?= the_author_meta( 'nickname', get_current_user_id() ) ?>
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="article_comments"><em>Comment: </em><?= get_comments_number() ?>
+                        </p>
+                    </div>
+
+                    <p> <?= get_paragraph( 1 ); ?> </p>
+
+					<?= get_citate(); ?>
+
+                    <p> <?= get_paragraph( 2 ); ?> </p>
+
+                </article>
+
             </div>
         </div>
     </section>
