@@ -14,9 +14,9 @@
     <div class="wrapper page_text page_home">
         <div class="introduction">
 
-	        <?php do_action( 'mainlabel'); ?>
+	        <?php 	the_field( 'main_label', MAIN_PAGE_ID ); ?>
 
-	        <?php do_action( 'maintext'); ?>
+	        <?php 	the_field( 'main_text', MAIN_PAGE_ID ); ?>
 
             <a class="button button_big button_orange float_left"><span class="inside">read more</span></a>
         </div>
@@ -27,11 +27,11 @@
                 <div class="inside">
 
                     <h1>
-						<?php do_action( 'featurelabel', [ 1 ] ); ?>
+						<?php the_field( "feature_label_1", MAIN_PAGE_ID ); ?>
                     </h1>
 
                     <p>
-						<?php do_action( 'featuretext', [ 1 ] ); ?>
+						<?php the_field( "feature_text_1", MAIN_PAGE_ID ); ?>
                     </p>
 
                     <p class="read_more"><a href="#">Read more</a></p>
@@ -42,11 +42,11 @@
             <li class="column column33 second">
                 <div class="inside">
                     <h1>
-		                <?php do_action( 'featurelabel', [ 2 ] ); ?>
+		                <?php the_field( "feature_label_2", MAIN_PAGE_ID ); ?>
                     </h1>
 
                     <p>
-		                <?php do_action( 'featuretext', [ 2 ] ); ?>
+		                <?php the_field( "feature_text_2", MAIN_PAGE_ID ); ?>
                     </p>
 
                     <p class="read_more"><a href="#">Read more</a></p>
@@ -55,11 +55,11 @@
             <li class="column column33 third">
                 <div class="inside">
                     <h1>
-		                <?php do_action( 'featurelabel', [ 3 ] ); ?>
+		                <?php the_field( "feature_label_3", MAIN_PAGE_ID ); ?>
                     </h1>
 
                     <p>
-		                <?php do_action( 'featuretext', [ 3 ] ); ?>
+		                <?php the_field( "feature_text_3", MAIN_PAGE_ID ); ?>
                     </p>
                     <p class="read_more"><a href="#">Read more</a></p>
                 </div>
@@ -72,11 +72,11 @@
                     <!--тут наверное косяк с классом! класс - inews а название - iCon -->
 
                     <h1>
-		                <?php do_action( 'iconlabel', [ 1 ] ); ?>
+		                <?php the_field( "icon_label_1", MAIN_PAGE_ID ) ?>
                     </h1>
 
                     <p>
-		                <?php do_action( 'icontext', [ 1 ] ); ?>
+		                <?php the_field( "icon_text_1", MAIN_PAGE_ID ); ?>
                     </p>
 
                     <p class="read_more"><a href="#">Read more</a></p>
@@ -86,11 +86,11 @@
                 <div class="inside">
 
                     <h1>
-		                <?php do_action( 'iconlabel', [ 2 ] ); ?>
+		                <?php the_field( "icon_label_2", MAIN_PAGE_ID ) ?>
                     </h1>
 
                     <p>
-		                <?php do_action( 'icontext', [ 2 ] ); ?>
+		                <?php the_field( "icon_text_2", MAIN_PAGE_ID )  ?>
                     </p>
 
                     <p class="read_more"><a href="#">Read more</a></p>
@@ -100,11 +100,11 @@
                 <div class="inside">
                     <!--тут наверное косяк с классом! класс - icon а название - iNews -->
                     <h1>
-		                <?php do_action( 'iconlabel', [ 3 ] ); ?>
+		                <?php the_field( "icon_label_3", MAIN_PAGE_ID ) ?>
                     </h1>
 
                     <p>
-		                <?php do_action( 'icontext', [ 3 ] ); ?>
+		                <?php the_field( "icon_text_3", MAIN_PAGE_ID );  ?>
                     </p>
 
                     <p class="read_more"><a href="#">Read more</a></p>
@@ -115,7 +115,7 @@
         <div class="underline"></div>
 
         <div class="portfolio">
-            <p class="all_projects"><a href="   <?php do_action( 'pagelink', PORTFOLIO_PAGE_ID); ?>">View all projects</a></p>
+            <p class="all_projects"><a href="   <?php  get_permalink( PORTFOLIO_PAGE_ID ) ?>">View all projects</a></p>
             <h1>Portfolio</h1>
 
             <div class="columns">

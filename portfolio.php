@@ -29,8 +29,7 @@ global $tax_from_tax; ?>
             <div class="breadcrumbs">
                 <div class="inside">
                     <a href="<?= home_url() ?>" class="first"><span>The Same</span></a>
-                    <a href="<?php $link = do_action( 'getportfoliolink' );
-					echo $link; ?>" class="last"><span>Portfolio</span></a>
+                    <a href="<?php the_permalink( PORTFOLIO_PAGE_ID ); ?>" class="last"><span>Portfolio</span></a>
 					<?php if ( $tax_from_tax != '' ) {
 						?>
                         <a class="last"><span><?= $tax_from_tax ?></span></a>
@@ -46,9 +45,9 @@ global $tax_from_tax; ?>
                 <ul id="portfolio_categories" class="portfolio_categories">
 
 
-                    <li class="<?php if ( $tax_from_tax == "" ) {
-						echo 'active';
-					} ?> segment-0"><a href="#" class="all">All Categories</a></li>
+                    <li class="<?php echo 'active'; ?> segment-0">
+                        <a href="#" class="all">All Categories</a>
+                    </li>
 
 					<?php
 
@@ -57,14 +56,14 @@ global $tax_from_tax; ?>
 						array(
 							'taxonomy'   => 'project_cat',
 							'hide_empty' => false,
-							//'parent'     => 0, - пуcть выводятся все категории
+							//'parent'     => 0, - all categorise needed
 						)
 					);
 
 					$list_of_project_cat = '<ul class="menu categories page_text">';
 					$num                 = 0;
 
-					foreach ( $terms as $v ) {//цикл по родительским таксономиям
+					foreach ( $terms as $v ) {//loop for parent's taxonomies
 						$num ++;
 						?>
                         <li class="
@@ -86,13 +85,13 @@ global $tax_from_tax; ?>
 
                 <ul class="portfolio_items columns">
 
-                    <!--проекты-->
+                    <!--projects content-->
 
 					<?php
 
 					$args2 = [
 						'post_type' => 'project',
-						'nopaging'  => true,//!!! post_per_page не отрабатывает как положено
+						'nopaging'  => true,// post_per_page not work proper
 					];
 
 					$loop = new WP_Query( $args2 );
@@ -127,7 +126,6 @@ global $tax_from_tax; ?>
                                         class="inside">read more</span></a>
                         </li>
 
-
 						<?php
 
 					}
@@ -142,7 +140,6 @@ global $tax_from_tax; ?>
 
             </div>
             <!--********-->
-
 
         </div>
 

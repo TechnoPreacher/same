@@ -14,7 +14,7 @@ Template Name: same_project
             <div class="breadcrumbs">
                 <div class="inside">
                     <a href="#" class="first"><span>The Same</span></a>
-                    <a href="<?php $link = do_action( 'getportfoliolink' );
+                    <a href="<?php $link = page_link( PORTFOLIO_PAGE_ID );
 					echo $link; ?>"><span>Portfolio</span></a>
                     <a href="<?= get_permalink() ?>" class="last"><span><?= get_the_title() ?></span></a>
                 </div>

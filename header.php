@@ -11,32 +11,17 @@
 
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/reset.css" type="text/css"/>
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/light.css" title="light"
-          type="text/css"/>
-    <link rel="alternate stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/dark.css" title="dark"
-          type="text/css"/>
+    <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/light.css" title="light" type="text/css"/>
+    <link rel="alternate stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/dark.css" title="dark" type="text/css"/>
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/flexslider.css" type="text/css"/>
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/prettyPhoto.css" type="text/css"/>
 
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.ui.min.js"></script>
-    <script type="text/javascript"
-            src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.flexslider.min.js"></script>
-    <script type="text/javascript"
-            src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.prettyphoto.min.js"></script>
-    <script type="text/javascript"
-            src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.stylesheettoggle.js"></script>
-
-
-
-
-
-
+    <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.flexslider.min.js"></script>
+    <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.prettyphoto.min.js"></script>
+    <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.stylesheettoggle.js"></script>
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.quicksand.js"></script>
-
-
-
-
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/onload.js"></script>
 
     <!--[if IE]>
@@ -75,6 +60,7 @@
         </li>
     </ul>
 </div>
+
 <!-- END STYLESHEET SWITCHER -->
 
 <!-- BEGIN PAGE -->
@@ -93,10 +79,8 @@
                         </ul>
                         <div class="clear"></div>
 
-
                         <nav>
                             <ul id="top_menu">
-
 
 								<?php
 								$menu_data = wp_get_nav_menu_items( 'mainmenu' );//bloginfo('url'); echo
@@ -165,13 +149,10 @@
 
 									<?php
 
-
 								} ?>
-
 
                             </ul>
                         </nav>
-
 
                     </div>
                     <div class="clear"></div>

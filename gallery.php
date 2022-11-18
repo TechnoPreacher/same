@@ -117,23 +117,9 @@ Template Name: same_gallery
 					);
 
 
-				$links2 = wp_kses_post
-					(
-					paginate_links(
-						[
-							'total'     => $query->max_num_pages,
-							'current'   => $current,
-							'prev_next' => true,
+			
 
-							'show_all' => true,
-
-						]
-					)
-					);
-
-			?> <h1>	<?php echo ($links2
-
-                    ); ?> </h1> <?php
+		
 
 
 				//придётся достать ссылки для начала и конца до формирования списка,

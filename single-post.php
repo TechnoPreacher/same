@@ -15,15 +15,15 @@ Template Name: same_blog_post
             <div class="breadcrumbs">
                 <div class="inside">
                     <a href="<?= home_url() ?>" class="first"><span>The Same</span></a>
-                    <a href="<?= do_action( 'getbloglink' ); ?>" class="last"><span>Blog</span></a>
-                    <a href="<?= get_permalink( get_the_ID() ) ?>" class="last"><span><?= the_title() ?></span></a>
+                    <a href="<?php the_permalink( BLOG_PAGE_ID ) ?>" class="last"><span>Blog</span></a>
+                    <a href="<?php the_permalink( get_the_ID() ) ?>" class="last"><span><?php the_title() ?></span></a>
 
                 </div>
             </div>
 
             <div class="introduction">
                 <h1 class="page_title"><?= the_title() ?></h1>
-				<?php //тут надо вытащить текущий пост
+				<?php //current post
 				do_action( 'singlepost', get_the_ID() );
 				?>
             </div>
