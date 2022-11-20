@@ -14,8 +14,8 @@ Template Name: same_project
             <div class="breadcrumbs">
                 <div class="inside">
                     <a href="#" class="first"><span>The Same</span></a>
-                    <a href="<?php $link = get_permalink( PORTFOLIO_PAGE_ID );
-					echo $link; ?>"><span>Portfolio</span></a>
+                    <a href="<?php $link = get_permalink(    get_theme_mod( 'portfolio_page_id') );
+					echo $link; ?>"><span><?php _e("Portfolio"); ?></span></a>
                     <a href="<?= get_permalink() ?>" class="last"><span><?= get_the_title() ?></span></a>
                 </div>
             </div>
@@ -25,9 +25,9 @@ Template Name: same_project
                 <div class="column column33">
                     <h1><?= the_field( 'same_project_title') ?> </h1>
                     <p><?= the_field( 'project_about_text' ) ?></p>
-                    <h1>Client:</h1>
+                    <h1><?php _e("Client"); ?>:</h1>
                     <p><?= the_field( 'project_company') ?></p>
-                    <h1>Model & Photographer:</h1>
+                    <h1><?php _e("Model & Photographer"); ?>:</h1>
                     <p><a href="#"><?= the_field( 'project_model') ?></a> // Jo-Who Shan</p>
                 </div>
 

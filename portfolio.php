@@ -29,7 +29,7 @@ global $tax_from_tax; ?>
             <div class="breadcrumbs">
                 <div class="inside">
                     <a href="<?= home_url() ?>" class="first"><span>The Same</span></a>
-                    <a href="<?php the_permalink( PORTFOLIO_PAGE_ID ); ?>" class="last"><span>Portfolio</span></a>
+                    <a href="<?php the_permalink( get_theme_mod( 'portfolio_page_id') ); ?>" class="last"><span><?php _e('Portfolio') ?></span></a>
 					<?php if ( $tax_from_tax != '' ) {
 						?>
                         <a class="last"><span><?= $tax_from_tax ?></span></a>
@@ -46,7 +46,7 @@ global $tax_from_tax; ?>
 
 
                     <li class="<?php echo 'active'; ?> segment-0">
-                        <a href="#" class="all">All Categories</a>
+                        <a href="#" class="all"><?php _e('All Categories') ?></a>
                     </li>
 
 					<?php

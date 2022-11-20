@@ -13,7 +13,7 @@ Template Name: same_gallery
         <div class="breadcrumbs">
             <div class="inside">
                 <a href="<?= home_url() ?>" class="first"><span>The Same</span></a>
-                <a href="<?= get_permalink( get_the_ID() ) ?>" class="last"><span>Gallery</span></a>
+                <a href="<?= get_permalink( get_the_ID() ) ?>" class="last"><span><?php _e("Gallery"); ?></span></a>
             </div>
         </div>
 
@@ -49,13 +49,9 @@ Template Name: same_gallery
 
 					if ( $forColumnCounter == 1 ) {
 						?>
-
                         <div class="columns">
-
 						<?php
 					}
-
-
 					?>
 
                     <div class="column column50">
@@ -83,7 +79,7 @@ Template Name: same_gallery
 								?>"
                                    data-rel="prettyPhoto[gallery]"
                                    class="button button_small button_orange float_right lightbox"><span
-                                            class="inside">zoom</span></a>
+                                            class="inside"><?php _e("zoom"); ?></span></a>
                             </p>
                         </div>
                     </div>
@@ -109,18 +105,11 @@ Template Name: same_gallery
 							'total'     => $query->max_num_pages,
 							'current'   => $current,
 							'prev_next' => true,
-
 							'show_all' => true,
 							'type'     => 'array',
 						]
 					)
 					);
-
-
-			
-
-		
-
 
 				//придётся достать ссылки для начала и конца до формирования списка,
                 // т.к. они не сразу видны в линках
@@ -132,7 +121,6 @@ Template Name: same_gallery
 
 					$rep         = array( '&quot;', '"' );
 					$v           = str_replace( $rep, '', $v );
-                    $v =  $v;
 					$needleFirst = "a class=prev page-numbers href=";
 					$needleNext  = "a class=next page-numbers href=";
 
@@ -140,26 +128,20 @@ Template Name: same_gallery
 
 					{
 						$fullcontent = $v;
-
 						$srcpart   = substr( $fullcontent,
 							strpos( $fullcontent, $needleFirst ) + mb_strlen( $needleFirst ) );
 						$src       = substr( $srcpart, 0, strpos( $srcpart, '>' ) );
 						$firstLink = $src;
-
 					}
 
 					if ( strpos( $v, $needleNext ) > 0 )//если нашли простые страницы пагинации
-
 					{
 						$fullcontent = $v;
-
 						$srcpart  = substr( $fullcontent,
 							strpos( $fullcontent, $needleNext ) + mb_strlen( $needleNext ) );
 						$src      = substr( $srcpart, 0, strpos( $srcpart, '>' ) );
 						$lastLink = $src;
-
 					}
-
 				}
 
 				?>
@@ -172,12 +154,8 @@ Template Name: same_gallery
 					foreach ( $links as $v ) {
 						$rep    = array( '&quot;', '"' , '%3E','#038;');
 						$v      = str_replace( $rep, '', $v );
-						$v = ( $v);
 						$needle = "a class=page-numbers href=";
-
 						if ( strpos( $v, $needle ) > 0 )//если нашли простые страницы пагинации
-
-
 						{
 							$fullcontent = $v;
 
@@ -185,9 +163,6 @@ Template Name: same_gallery
 							$src     = substr( $srcpart, 0, strpos( $srcpart, '>' ) );
 							$title   = substr( $srcpart, strpos( $srcpart, '>' ) + 1,
 								strpos( $srcpart, '>' ) - ( strpos( $srcpart, '</a>' ) - 3 ) );
-
-
-
 
 							?>
                             <li><a href="<?= $src ?>"><span><?= $title ?></span></a></li>
@@ -203,14 +178,10 @@ Template Name: same_gallery
 							$info         = substr( $srcpart, 0, strpos( $srcpart, '</span>' ) );
 							?>
                             <li class="active"><a><span><?= $info ?></span></a></li> <?php
-
 						}
-
 					}
 
-
 					?>
-
 
                     <li class="arrow arrow_right"><a href="<?= $lastLink ?>"><span></span></a></li>
                 </ul>
@@ -228,7 +199,6 @@ Template Name: same_gallery
 			?>
 
         </div>
-
 
     </div>
 </section>

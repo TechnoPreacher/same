@@ -48,14 +48,14 @@
             <a href="#" class="sheet" id="light">
                 <span class="image"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/stylesheet_light.jpg" alt=""/></span>
                 <span class="mask"></span>
-                <span class="name">Light version</span>
+                <span class="name"><?php _e("Light version"); ?></span>
             </a>
         </li>
         <li>
             <a href="#" class="sheet" id="dark">
                 <span class="image"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/stylesheet_dark.jpg" alt=""/></span>
                 <span class="mask"></span>
-                <span class="name">Dark version</span>
+                <span class="name"><?php _e("Dark version"); ?></span>
             </a>
         </li>
     </ul>
@@ -103,7 +103,7 @@
 										<?php
 									}
 
-									//дети
+									//children
 
 									$menu_сhildren = [];
 									foreach ( $childs as $v ) {
@@ -113,7 +113,7 @@
 
 									}
 
-									//если дети есть - тащу на фронт
+									//if there is child - show it
 
 									if ( count( $menu_сhildren ) > 0 ) { ?>
 
@@ -122,27 +122,18 @@
 												<?php
 
 												foreach ( $menu_сhildren as $menu_child_item ) {
-
 													?>
-
                                                     <li>
                                                         <a href="<?=$menu_child_item->url ?>"><span><?= $menu_child_item->title ?></span></a>
                                                     </li>
-
-
 													<?php
 												}
-
-
 												?>
-
-
                                             </ul>
                                         </div>
 										<?php
-
 									}
-									//закрыл пункт меню в любом случае!
+									//closing tag for menu's punkt
 									?>
 
                                     </li>
@@ -158,5 +149,3 @@
                     <div class="clear"></div>
                 </div>
             </header>
-
-
