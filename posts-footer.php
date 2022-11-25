@@ -1,6 +1,6 @@
 <?php
     /**
-    front contennt for recent posts on footer and right sidebar
+    front content for recent posts on footer and right sidebar
      */
 	$args = array(
 		'post_type'      => 'post',

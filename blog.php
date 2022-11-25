@@ -66,12 +66,7 @@
 
                 <div class="padd16bot">
                     <h1><?php esc_html_e( 'Recent Posts blog.php' ); ?></h1>
-					<?php
-                        //do_action( 'posts', array( 3 ) );
-
-						get_template_part( 'posts', 'footer' );
-
-					?>
+					<?php get_template_part( 'posts', 'footer' ); ?>
                 </div>
 
                 <div class="padd16bot">

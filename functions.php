@@ -9,11 +9,9 @@
 
 	add_action( 'projects_in_footer_all_in_li_tag', 'footer_tax' );// project's taxonomies for footer.
 	add_action( 'last_projects_on_page', 'last_projects' );// projects for "last roject" blocks.
-//	add_action( 'postforpage', 'posts_on_page' );// posts for post's page.
 	add_action( 'imurl', 'get_image_url' );// get image src url from content.
 	add_action( 'featurelabel', 'get_feature_label' );// feature's labels from ACF (fill on mainpage).
 	add_action( 'featuretext', 'get_feature_text' );// feature's info from ACF (fill on mainpage).
-	add_action( 'slider', 'get_slider' );// slider set/fill in custom content type.
 	add_action( 'customize_register', 'customizer_init' );// custom section on Customizer page!.
 	add_action( 'after_setup_theme', 'after_setup_theme_action' );// some must-have setup.
 	add_action( 'init', 'register_my_menus' );
@@ -136,38 +134,6 @@
 				'primary' => esc_html__( 'Primary', 'same' ),
 			)
 		);
-	}
-
-	function get_slider() {
-
-		$num = absint( get_field( 'number_of_slides', get_theme_mod( 'main_page_id' ) ) );
-		$num = ( $num > 0 ) ? $num : 5;
-
-		$args = array(
-			'post_type'      => 'slider',
-			'posts_per_page' => $num,
-		);
-
-		$loop = new WP_Query( $args );
-
-		while ( $loop->have_posts() ) {
-			$loop->the_post();
-			?>
-            <li><img src="<?php the_field( 'same_slider_image', get_the_ID() ); ?>" alt=""/>
-                <p class="flex-caption"><strong>
-						<?php
-							the_field(
-								'same_slider_title',
-								get_the_ID()
-							);
-						?>
-                    </strong><span>
-						<?php the_field( 'same_slider_info', get_the_ID() ); ?>
-				</span></p></li>
-
-			<?php
-		}
-		wp_reset_postdata();
 	}
 
 
