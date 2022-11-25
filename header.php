@@ -1,7 +1,8 @@
 <?php
-/**
- * The template for displaying the header.
- **/
+	/**
+	 * The template for displaying the header.
+	 **/
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -11,19 +12,23 @@
 
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/reset.css" type="text/css"/>
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/light.css" title="light" type="text/css"/>
-    <link rel="alternate stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/dark.css" title="dark" type="text/css"/>
+    <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/light.css" title="light"
+          type="text/css"/>
+    <link rel="alternate stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/dark.css" title="dark"
+          type="text/css"/>
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/flexslider.css" type="text/css"/>
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/prettyPhoto.css" type="text/css"/>
 
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.ui.min.js"></script>
-    <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.flexslider.min.js"></script>
-    <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.prettyphoto.min.js"></script>
-    <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.stylesheettoggle.js"></script>
+    <script type="text/javascript"
+            src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.flexslider.min.js"></script>
+    <script type="text/javascript"
+            src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.prettyphoto.min.js"></script>
+    <script type="text/javascript"
+            src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.stylesheettoggle.js"></script>
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.quicksand.js"></script>
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/onload.js"></script>
-
     <!--[if IE]>
     <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/html5.js"></script>
     <![endif]-->
@@ -32,7 +37,7 @@
     <![endif]-->
     <meta charset="UTF-8">
 
-	<?php wp_head() ?>
+	<?php wp_head(); ?>
 
 </head>
 
@@ -46,16 +51,18 @@
     <ul id="stylesheets">
         <li>
             <a href="#" class="sheet" id="light">
-                <span class="image"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/stylesheet_light.jpg" alt=""/></span>
+                <span class="image"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/stylesheet_light.jpg"
+                                         alt=""/></span>
                 <span class="mask"></span>
-                <span class="name"><?php _e("Light version"); ?></span>
+                <span class="name"><?php esc_html_e( 'Light version' ); ?></span>
             </a>
         </li>
         <li>
             <a href="#" class="sheet" id="dark">
-                <span class="image"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/stylesheet_dark.jpg" alt=""/></span>
+                <span class="image"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/gfx/stylesheet_dark.jpg"
+                                         alt=""/></span>
                 <span class="mask"></span>
-                <span class="name"><?php _e("Dark version"); ?></span>
+                <span class="name"><?php esc_html_e( 'Dark version' ); ?></span>
             </a>
         </li>
     </ul>
@@ -78,73 +85,18 @@
                             <li><a href="#" class="rss"></a></li>
                         </ul>
                         <div class="clear"></div>
-
                         <nav>
-                            <ul id="top_menu">
-
-								<?php
-								$menu_data = wp_get_nav_menu_items( 'mainmenu' );//bloginfo('url'); echo
-
-								$home   = array_shift( $menu_data );//убил первый элемент - в нём домащняя страница была
-								$childs = $menu_data;
-								?>
-
-                                <li class="current"><a href="<?= $home->url ?>"><?= $home->title ?>  </a></li>
-
-								<?php foreach ( $menu_data as $menu_item ) {
-
-									if ( $menu_item->menu_item_parent == 0 && $menu_item->post_parent == 0 )//отбор только не имющих детей и не являющихся детьми - а значит корневых пунктов меню
-									{
-										?>
-
-                                        <li>
-                                        <a href="<?= $menu_item->url ?>"><?= $menu_item->title ?></a>
-
-										<?php
-									}
-
-									//children
-
-									$menu_сhildren = [];
-									foreach ( $childs as $v ) {
-										if ( $v->menu_item_parent == $menu_item->ID ) {
-											array_push( $menu_сhildren, $v );
-										}
-
-									}
-
-									//if there is child - show it
-
-									if ( count( $menu_сhildren ) > 0 ) { ?>
-
-                                        <div class="submenu">
-                                            <ul>
-												<?php
-
-												foreach ( $menu_сhildren as $menu_child_item ) {
-													?>
-                                                    <li>
-                                                        <a href="<?=$menu_child_item->url ?>"><span><?= $menu_child_item->title ?></span></a>
-                                                    </li>
-													<?php
-												}
-												?>
-                                            </ul>
-                                        </div>
-										<?php
-									}
-									//closing tag for menu's punkt
-									?>
-
-                                    </li>
-
-									<?php
-
-								} ?>
-
-                            </ul>
+							<?php
+								wp_nav_menu( array(
+									'theme_location' => 'header-menu',
+									'menu'           => 'mainmenu',
+									'menu_id'        => 'top_menu',
+									'items_wrap'     => '<ul id="%1$s">%3$s</ul>',
+									'item_spacing'   => 'preserve',
+									'walker'         => new MenuWalker(),
+								) );
+							?>
                         </nav>
-
                     </div>
                     <div class="clear"></div>
                 </div>

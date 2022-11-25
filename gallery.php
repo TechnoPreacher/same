@@ -8,16 +8,17 @@ Template Name: same_gallery
 <?php get_header(); ?>
 
 <section id="content">
-	<div class="wrapper page_text">
+    <div class="wrapper page_text">
 
-		<div class="breadcrumbs">
-			<div class="inside">
-				<a href="<?php echo home_url(); ?>" class="first"><span>The Same</span></a>
-				<a href="<?php echo get_permalink( get_the_ID() ); ?>" class="last"><span><?php _e( 'Gallery' ); ?></span></a>
-			</div>
-		</div>
+        <div class="breadcrumbs">
+            <div class="inside">
+                <a href="<?php echo esc_url( home_url() ); ?>" class="first"><span>The Same</span></a>
+                <a href="<?php echo esc_url( get_permalink( get_the_ID() ) ); ?>"
+                class="last"><span><?php esc_html_e( 'Gallery' ); ?></span></a>
+            </div>
+        </div>
 
-		<div class="page_gallery">
+        <div class="page_gallery">
 
 			<?php
 
@@ -37,37 +38,34 @@ Template Name: same_gallery
 			);
 
 			if ( $query->have_posts() ) {
-				?>
-				<?php absint( $current ); ?>
 
-				<?php
-				$forColumnCounter = 0;
+				$for_column_counter = 0;
 				while ( $query->have_posts() ) {
-					$forColumnCounter ++;
+					$for_column_counter ++;
 
 					$query->the_post();
 
-					if ( $forColumnCounter == 1 ) {
+					if ( 1 === $for_column_counter ) {
 						?>
-						<div class="columns">
+                        <div class="columns">
 						<?php
 					}
 					?>
 
-					<div class="column column50">
+                    <div class="column column50">
 
-						<div class="image">
+                        <div class="image">
 
-							<img src="
+                            <img src="
 							<?php
 							the_field( 'same_slider_image', get_the_ID() );
 							?>
 							"
-								 alt=""/>
-							<p class="caption">
-								<strong><?php the_field( 'same_slider_title', get_the_ID() ); ?></strong>
+                            alt=""/>
+                            <p class="caption">
+                                <strong><?php the_field( 'same_slider_title', get_the_ID() ); ?></strong>
 
-								<span>
+                                <span>
 									<?php
 									the_field( 'same_slider_info', get_the_ID() );
 
@@ -75,25 +73,25 @@ Template Name: same_gallery
 
 								</span>
 
-								<a href=" 
+                                <a href="
 								<?php
 								the_field( 'same_slider_image', get_the_ID() );
 
 								?>
 								"
-								   data-rel="prettyPhoto[gallery]"
-								   class="button button_small button_orange float_right lightbox"><span
-											class="inside"><?php _e( 'zoom' ); ?></span></a>
-							</p>
-						</div>
-					</div>
+                                    data-rel="prettyPhoto[gallery]"
+                                    class="button button_small button_orange float_right lightbox"><span
+                                            class="inside"><?php esc_html_e( 'zoom' ); ?></span></a>
+                            </p>
+                        </div>
+                    </div>
 
 					<?php
 
-					if ( $forColumnCounter == 2 ) {
+					if ( 2 === $for_column_counter ) {
 						?>
 
-						</div>
+                        </div>
 
 						<?php
 						$for_column_counter = 0;
@@ -114,44 +112,42 @@ Template Name: same_gallery
 					)
 					);
 
-				// придётся достать ссылки для начала и конца до формирования списка,
-				// т.к. они не сразу видны в линках
+				// links for begin-end.
 
 				$first_link = '';
 				$last_link  = '';
 
 				foreach ( $links as $v ) {
 
-					$rep         = array( '&quot;', '"' );
-					$v           = str_replace( $rep, '', $v );
+					$rep          = array( '&quot;', '"' );
+					$v            = str_replace( $rep, '', $v );
 					$needle_first = 'a class=prev page-numbers href=';
 					$needle_next  = 'a class=next page-numbers href=';
 
 					if ( strpos( $v, $needle_first ) > 0 ) {
-						$fullcontent = $v;
-						$srcpart     = substr(
-							$fullcontent,
-							strpos( $fullcontent, $needle_first ) + mb_strlen( $needle_first )
+						$full_content = $v;
+						$src_part     = substr(
+							$full_content,
+							strpos( $full_content, $needle_first ) + mb_strlen( $needle_first )
 						);
-						$src         = substr( $srcpart, 0, strpos( $srcpart, '>' ) );
-						$firstLink   = $src;
+						$src          = substr( $src_part, 0, strpos( $src_part, '>' ) );
+						$first_link   = $src;
 					}
 
 					if ( strpos( $v, $needle_next ) > 0 ) {
-						$fullcontent = $v;
-						$srcpart     = substr(
-							$fullcontent,
-							strpos( $fullcontent, $needle_next ) + mb_strlen( $needle_next )
+						$full_content = $v;
+						$src_part     = substr(
+							$full_content,
+							strpos( $full_content, $needle_next ) + mb_strlen( $needle_next )
 						);
-						$src         = substr( $srcpart, 0, strpos( $srcpart, '>' ) );
-						$lastLink    = $src;
+						$src          = substr( $src_part, 0, strpos( $src_part, '>' ) );
+						$last_link    = $src;
 					}
 				}
 
 				?>
-				<ul class="pagenav">
-
-					<li class="arrow arrow_left"><a href="<?php echo $first_link; ?>"><span></span></a></li>
+                <ul class="pagenav">
+                    <li class="arrow arrow_left"><a href="<?php echo esc_url( $first_link ); ?>"><span></span></a></li>
 
 					<?php
 
@@ -160,39 +156,40 @@ Template Name: same_gallery
 						$v      = str_replace( $rep, '', $v );
 						$needle = 'a class=page-numbers href=';
 						if ( strpos( $v, $needle ) > 0 ) {
-							$fullcontent = $v;
-
-							$srcpart = substr( $fullcontent, strpos( $fullcontent, $needle ) + mb_strlen( $needle ) );
-							$src     = substr( $srcpart, 0, strpos( $srcpart, '>' ) );
-							$title   = substr(
-								$srcpart,
-								strpos( $srcpart, '>' ) + 1,
-								strpos( $srcpart, '>' ) - ( strpos( $srcpart, '</a>' ) - 3 )
+							$full_content = $v;
+							$src_part     = substr( $full_content, strpos( $full_content, $needle ) + mb_strlen( $needle ) );
+							$src          = substr( $src_part, 0, strpos( $src_part, '>' ) );
+							$title_       = substr(
+								$src_part,
+								strpos( $src_part, '>' ) + 1,
+								strpos( $src_part, '>' ) - ( strpos( $src_part, '</a>' ) - 3 )
 							);
 
 							?>
-							<li><a href="<?php echo $src; ?>"><span><?php echo $title; ?></span></a></li>
+                            <li>
+                                <a href="<?php echo esc_url( $src ); ?>"><span><?php echo esc_textarea( $title_ ); ?></span></a>
+                            </li>
 							<?php
 						}
 
 						$needle2 = 'class=page-numbers current';
 						if ( strpos( $v, $needle2 ) > 0 ) {
-							$fullcontent2 = $v;
-							$srcpart      = substr(
-								$fullcontent2,
-								strpos( $fullcontent2, $needle2 ) + mb_strlen( $needle2 ) + 1
+							$full_content2 = $v;
+							$src_part      = substr(
+								$full_content2,
+								strpos( $full_content2, $needle2 ) + mb_strlen( $needle2 ) + 1
 							);
-							$info         = substr( $srcpart, 0, strpos( $srcpart, '</span>' ) );
+							$info          = substr( $src_part, 0, strpos( $src_part, '</span>' ) );
 							?>
-							<li class="active"><a><span><?php echo $info; ?></span></a></li> 
-															<?php
+                            <li class="active"><a><span><?php echo esc_textarea( $info ); ?></span></a></li>
+							<?php
 						}
 					}
 
 					?>
 
-					<li class="arrow arrow_right"><a href="<?php echo $lastLink; ?>"><span></span></a></li>
-				</ul>
+                    <li class="arrow arrow_right"><a href="<?php echo esc_url( $last_link ); ?>"><span></span></a></li>
+                </ul>
 
 				<?php
 
@@ -206,9 +203,8 @@ Template Name: same_gallery
 
 			?>
 
-		</div>
-
-	</div>
+        </div>
+    </div>
 </section>
 
 <?php get_footer(); ?>

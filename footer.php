@@ -16,8 +16,16 @@
 			</div>
 
 			<div class="box second">
-				<h3><?php _e( 'Recent Posts' ); ?></h3>
-				<?php do_action( 'posts', array( 3 ) ); ?>
+				<h3><?php _e( 'Recent Posts footer.php' ); ?></h3>
+				<?php
+                    //do_action( 'posts', array( 3 ) );
+
+                    ?>
+
+				<?php
+					get_template_part( 'posts', 'footer' );
+				?>
+
 			</div>
 
 
