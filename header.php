@@ -87,14 +87,15 @@
                         <div class="clear"></div>
                         <nav>
 							<?php
-								wp_nav_menu( array(
+								$menu_args = array(
 									'theme_location' => 'header-menu',
 									'menu'           => 'mainmenu',
 									'menu_id'        => 'top_menu',
 									'items_wrap'     => '<ul id="%1$s">%3$s</ul>',
 									'item_spacing'   => 'preserve',
 									'walker'         => new MenuWalker(),
-								) );
+								);
+								wp_nav_menu( $menu_args );
 							?>
                         </nav>
                     </div>

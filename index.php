@@ -112,7 +112,10 @@
 
         <div class="portfolio">
             <p class="all_projects"><a
-                        href="   <?php esc_url( the_permalink( get_theme_mod( 'portfolio_page_id' ) ) ); ?>"><?php esc_html_e( 'View all projects' ); ?></a>
+                        href="
+                        <?php echo esc_url( get_permalink( get_theme_mod( 'portfolio_page_id' ) ) ); ?>
+                            ">
+                        <?php esc_html_e( 'View all projects' ); ?></a>
             </p>
             <h1><?php esc_html_e( 'Portfolio' ); ?></h1>
 

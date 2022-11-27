@@ -16,11 +16,7 @@
 			</div>
 
 			<div class="box second">
-				<h3><?php _e( 'Recent Posts footer.php' ); ?></h3>
-				<?php
-                    //do_action( 'posts', array( 3 ) );
-
-                    ?>
+				<h3><?php _e( 'Recent Posts' ); ?></h3>
 
 				<?php
 					get_template_part( 'posts', 'footer' );
@@ -47,10 +43,10 @@
 	<!-- BEGIN FOOTER -->
 	<footer id="footer">
 		<div class="wrapper">
-			<p class="copyrights"><?php echo get_theme_mod( 'copy_right' ); ?></p>
+			<p class="copyrights"><?php echo esc_html( get_theme_mod( 'copy_right' ) ); ?></p>
 			<a href="#page" class="up">
 				<span class="arrow"></span>
-				<span class="text"><?php _e( 'top' ); ?></span>
+				<span class="text"><?php esc_html_e( 'top' ); ?></span>
 			</a>
 		</div>
 	</footer>

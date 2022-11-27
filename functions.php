@@ -5,7 +5,9 @@
 // id for portfolio page 101 - pp.local, 156 - web4pro.pp.ua.
 // id for blog page (need for breadcrumbs) 118 -  pp.local, 153 - web4pro.pp.ua.
 
-	include_once 'MenuWalker.php'; //walker for menu customization.
+	require_once 'class-menuwalker.php';// walker for menu customization.
+
+	require_once 'parser_functions.php';// some helper functions for content's parts extraction.
 
 	add_action( 'projects_in_footer_all_in_li_tag', 'footer_tax' );// project's taxonomies for footer.
 	add_action( 'last_projects_on_page', 'last_projects' );// projects for "last roject" blocks.
@@ -20,10 +22,7 @@
 		add_theme_support( 'post-thumbnails' );
 	}
 
-	/** For customizator
-	 *
-	 * @param WP_Customize_Manager $wp_customize object.
-	 */
+
 	function customizer_init( WP_Customize_Manager $wp_customize ) {
 
 		$section = 'copyright';
@@ -219,57 +218,5 @@
 			$list_of_project_cat .= ' </li>';// closing tag for list's row.
 		}
 
-		echo ( ( $list_of_project_cat ) ) . '</ul>';// closing tag for list.
-	}
-
-	function get_citate( $content ): string {
-		if ( '' == $content ) {
-			return '';
-		}
-		$dom = new DOMDocument( '1.0', 'utf-8' );
-		libxml_use_internal_errors( true );
-
-		$html = mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' );
-		$dom->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
-		$data   = $dom->getElementsByTagName( 'blockquote' )->item( 0 );
-		$output = '';
-		if ( null !== $data ) {
-			// $author = $data->firstChild->nodeValue;
-			$text = $data->lastChild->nodeValue;
-			// $output = "<q>" . $author . "<br>" . $text . "</q>";
-			$output = '<q>' . $text . '</q>';
-		}
-		unset( $dom );
-		libxml_clear_errors();
-
-		return $output;
-	}
-
-	function get_image_url( $content = '' ): string {
-
-		$dom = new DOMDocument( '1.0', 'utf-8' );
-		libxml_use_internal_errors( true );
-
-		if ( '' === $content ) {
-			$content = get_the_content();
-		}
-
-		$html = mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' );
-
-		$dom->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
-
-		$images = $dom->getElementsByTagName( 'img' );
-		$link   = '';
-
-		if ( 0 !== $images->length ) {
-			foreach ( $images as $image ) {
-				$link = ( $image->getAttribute( 'src' ) );
-				break;// only first image source.
-			}
-		}
-
-		unset( $dom );
-		libxml_clear_errors();
-
-		return $link;
+		echo ( $list_of_project_cat ) . '</ul>';// closing tag for list.
 	}
