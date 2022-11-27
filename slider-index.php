@@ -5,7 +5,6 @@
 
 				<?php
 
-
 					$num = absint( get_field( 'number_of_slides', get_theme_mod( 'main_page_id' ) ) );
 					$num = ( $num > 0 ) ? $num : 5;
 

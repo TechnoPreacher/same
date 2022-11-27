@@ -1,6 +1,6 @@
 <?php
 	/*
-	single article content part
+	Single article content part
 	*/
 ?>
 
@@ -14,17 +14,17 @@
 		if ( has_blocks() ) {
 			$blocks = parse_blocks( get_the_content() );
 			foreach ( $blocks as $v ) {
-				if ( $v['blockName'] === 'core/image' ) {
+				if ( 'core/image' === $v['blockName'] ) {
 					if ( '' == $url ) {
 						$url = get_image_url( $v['innerHTML'] );
 					}
 				}
-				if ( $v['blockName'] === 'core/quote' ) {
+				if ( 'core/quote' === $v['blockName'] ) {
 					if ( '' == $q ) {
 						$q = $v['innerHTML'];
 					}
 				}
-				if ( $v['blockName'] === 'core/paragraph' ) {
+				if ( 'core/paragraph' === $v['blockName'] ) {
 					if ( '' == $p1 ) {
 						$p1 = $v['innerHTML'];
 						continue;
@@ -47,18 +47,18 @@
 
     <div class="article_image nomargin">
         <div class="inside">
-            <img src="<?php echo $args_['url']; ?>" alt=""/>
+            <img src="<?php echo esc_url( $args_['url']); ?>" alt=""/>
         </div>
     </div>
 
     <div class="article_details">
         <ul class="article_author_date">
-            <li><em><?php _e( 'Add:' ) ?> </em>
+            <li><em><?php esc_html_e( 'Add:' ) ?> </em>
 				<?php
 					echo get_the_date()
 				?>
             </li>
-            <li><em><?php _e( 'Author:' ) ?> </em>
+            <li><em><?php esc_html_e( 'Author:' ) ?> </em>
                 <a href="<?php the_author_meta( 'url' ); ?>">
 					<?php the_author_meta( 'nickname' ); ?>
                 </a>
@@ -77,7 +77,9 @@
 	<?php echo( get_citate( $args_['q'] ) ); ?>
     <p><?php echo $args_['p2']; ?></p>
 
-	<?php if ( sizeof($args)>0 ) { ?>
+	<?php
+        // $args is from context.
+        if ( count($args)>0 ) { ?>
         <a class="button button_small button_orange float_left"
            href="<?php echo esc_url( get_permalink() ); ?>">
             <span class="inside"><?php esc_html_e( 'read more' ); ?></span>
